@@ -1,0 +1,501 @@
+.contact_cont{
+    padding: 100px 5vw 80px 5vw!important;
+    max-width: 1800px;
+}
+.contact_cont > .heading{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 50px;
+}
+.contact_cont .section1{
+    position: relative;
+}
+.contact_cont .form_cont{
+    display: grid;
+    grid-template: 0.5fr 0.5fr 0.5fr / 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    grid-row-gap: 5px;
+}
+.contact_cont .form_cont .phone{
+    display: flex;
+    width: 80%;
+    grid-column: 1 / 3;
+}
+.contact_cont .form_cont .phone .form:first-child{
+    width: 50%;
+    margin-right: 30px;
+}
+.contact_cont .form_cont .notes{
+    grid-column: 1 / 3;
+}
+.contact_cont .form{
+    width: 90%;
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+    color: black;
+}
+.contact_cont .form input{
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    color: #595f6e;
+    padding-top: 30px;
+    padding-left: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0);
+}
+.contact_cont .form label{
+    font-size: 18px;
+    position: absolute;
+    bottom: 0px;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid black;
+}
+.contact_cont .form label::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -1px;
+    width: 100%;
+    height: 100%;
+    border-bottom: 4px solid var(--lineColour);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+.contact_cont .field{
+    position: relative;
+}
+.contact_cont .field .form_error{
+    position: absolute;
+    bottom: -20px;
+    margin-left: 5px;
+    font-size: 12px;
+    display: none;
+    color: red;
+} 
+.contact_cont .field .form_error.active{
+    display: block;
+}
+
+.contact_cont .content-name{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.contact_cont .form input:focus + .label-name .content-name,
+.contact_cont .form input:valid + .label-name .content-name {
+    transform: translateY(-120%);
+    font-size: 19px;
+    color: var(--lineColour);
+
+}
+.contact_cont .name.err .form label,
+.contact_cont .email.err .form label,
+.contact_cont .phone.err .form label{
+    color: red;
+}
+.contact_cont .name.err .form label::after,
+.contact_cont .email.err .form label::after,
+.contact_cont .phone.err .form label::after{
+    border-bottom: 4px solid red;
+}
+.contact_cont .name.err .form input:focus + .label-name .content-name,
+.contact_cont .name.err .form input:valid + .label-name .content-name,
+.contact_cont .email.err .form input:focus + .label-name .content-name,
+.contact_cont .email.err .form input:valid + .label-name .content-name,
+.contact_cont .phone.err .form input:focus + .label-name .content-name,
+.contact_cont .phone.err .form input:valid + .label-name .content-name{
+    color: red;
+}
+
+.contact_cont .form input:focus + .label-name::after, 
+.contact_cont .form input:valid + .label-name::after{
+    transform: translateX(0%);
+}
+
+.contact_cont .form_cont .notes .heading{
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.contact_cont .form_cont textarea{
+    width: 95%;
+    height: 125px;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    transition: 0.5s ease-in-out;
+}
+.contact_cont .form_cont .notes.err textarea{
+    border: 2px solid red;
+}
+.contact_cont .form_cont textarea:hover{
+    border: 1px solid var(--lineColour);
+}
+.contact_cont .submit{
+    grid-column: 1 / span 2;
+    width: fit-content;
+    justify-self: center;
+    margin-top: 20px;
+    padding: 10px 25px;
+    background-color: var(--btnColour);
+    color: white;
+    border-radius: 50px; 
+    font-size: 18px;
+    transition: 0.5s ease-in-out;
+    border: 0px;
+    cursor: pointer;
+}
+.contact_cont .submit:hover{
+    text-decoration: none;
+    filter: brightness(1.1);
+    transform: translateY(-5px);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.contact_cont .confirmation{
+    grid-column: 1 / span 2;
+    text-align: center;
+    font-size: 14px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+}
+.contact_cont .confirmation.sent{
+    opacity: 1;
+    color: green;
+    transform: translateY(0px);
+}
+.contact_cont .confirmation.error{
+    opacity: 1;
+    color: var(--error);
+    transform: translateY(0px);
+}
+.contact_cont .section2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 2px solid var(--lineColour);
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.contact_cont .section2 .heading .big{
+    font-size: 32px;
+    font-weight: 600;
+}
+.contact_cont .section2 .contact_us .reach{
+    font-size: 17px;
+    margin-top: 25px;
+    cursor: pointer;
+    display: flex;
+}
+.contact_cont .section2 .contact_us .reach a{
+    color: black;
+}
+.contact_cont .section2 .contact_us .reach.user{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.contact_cont .section2 .contact_us svg{
+    width: 40px;
+    font-size: 22px;
+}
+.contact_cont .social{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.contact_cont .socialcontainer{
+    padding: 50px 30px;
+    width: fit-content;
+}
+.contact_cont .social-icons{
+    display: flex;
+}
+.contact_cont .social-icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 50%;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+.contact_cont .social-icons .mob{
+    color: var(--lineColour);
+    animation-name: mob;
+    animation-direction: normal;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+@keyframes mob{
+    0%{
+        color: var(--lineColour);
+        background-color: transparent;
+        transform: scale(1);
+    }
+    10%{
+        background: var(--lineColour);
+        color: white;
+        transform: scale(1.1);
+    }
+    20%{
+        color: var(--lineColour);
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+.contact_cont .social-icons .mob:hover{
+    background: var(--lineColour);
+    color: white;
+    transform: translateY(-10px) scale(1.1);
+}
+.contact_cont .social-icons .loc{
+    color: #4267B2;
+    animation-name: loc;
+    animation-direction: normal;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+@keyframes loc{
+    20%{
+        color: #4267B2;
+        background-color: transparent;
+        transform: scale(1);
+    }
+    30%{
+        background-color: #4267B2;
+        color: white;
+        transform: scale(1.1);
+    }
+    40%{
+        color: #4267B2;
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+.contact_cont .social-icons .loc:hover{
+    background: #4267B2;
+    color: white;
+    transform: translateY(-10px) scale(1.1);
+}
+.contact_cont .social-icons .mail{
+    color: #c71610;
+    animation-name: mail;
+    animation-direction: normal;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+@keyframes mail{
+    40%{
+        color: #c71610;
+        background-color: transparent;
+        transform: scale(1);
+    }
+    50%{
+        background-color: #c71610;
+        transform: scale(1.1);
+        color: white;
+    }
+    60%{
+        color: #c71610;
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+.contact_cont .social-icons .mail:hover {
+    background: #c71610;
+    color: white;
+    transform: translateY(-10px) scale(1.1);
+}
+.contact_cont .social-icons .yt{
+    color: #FF0000;
+    animation-name: yt;
+    animation-direction: normal;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+@keyframes yt{
+    60%{
+        color: 	#FF0000;
+        background-color: transparent;
+        transform: scale(1);
+    }
+    70%{
+        background-color: #FF0000;
+        transform: scale(1.1);
+        color: white;
+    }
+    80%{
+        color: #FF0000;
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+.contact_cont .social-icons .yt:hover {
+    background: #FF0000;
+    color: white;
+    transform: translateY(-10px) scale(1.1);
+}
+.contact_cont .social-icons .link{
+    color: #E1306C;
+    animation-name: link;
+    animation-direction: normal;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+@keyframes link{
+    80%{
+        transform: scale(1);
+        color: #E1306C;
+        background-color: transparent;
+    }
+    90%{
+        transform: scale(1.1);
+        background-color: #E1306C;
+        color: white;
+    }
+    100%{
+        color: #E1306C;
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+.contact_cont .social-icons .link:hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    color: white;
+    transform: translateY(-10px) scale(1.1);
+}
+.contact_cont .socialcontainer:hover .social-icons .mob,
+.contact_cont .socialcontainer:hover .social-icons .loc,
+.contact_cont .socialcontainer:hover .social-icons .mail,
+.contact_cont .socialcontainer:hover .social-icons .yt,
+.contact_cont .socialcontainer:hover .social-icons .link{
+    animation-name: none;
+}
+
+@media only screen and (max-width:1075px){
+
+    .contact_cont .section1 .heading .big{
+        font-size: 28px;
+    }
+    .contact_cont .section2 .heading .big{
+        font-size: 24px;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width:1075px){
+
+    .contact_cont .section2{
+        border-left: none;
+        padding-left: 20px;
+    }
+    .contact_cont .section2 .section2_cont{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media only screen and (max-width:550px){
+
+    .cont-head .big{
+        font-size: 24px;
+    }
+    .cont-head .small{
+        font-size: 16px;
+    }
+    .contact_cont .form_cont{
+        padding-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .contact_cont .form_cont .option{
+        width: 90%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+    .form{
+        font-size: 18px;
+    }
+    .contact_cont .form input:focus + .label-name .content-name,
+    .contact_cont .form input:valid + .label-name .content-name {
+        font-size: 16px;
+    }
+    .contact_cont .form_cont .notes .heading{
+        font-size: 18px;
+    }
+    .contact_cont .form_cont .option{
+        display: none;
+    }
+    .contact_cont .form_cont .submit{
+        align-self: center;
+    }
+    .contact_cont .form_cont textarea{
+        font-size: 16px;
+    }
+    .contact_cont .submit_cont .submit{
+        font-size: 18px;
+    }
+    .contact_cont .section1 .heading .big{
+        font-size: 24px;
+    }
+    .contact_cont .section2 .heading .big{
+        font-size: 18px;
+        margin-top: 40px;
+    }
+    .contact_cont .section2 .contact_us .reach{
+        font-size: 16px;
+    }
+    .contact_cont .section2 .contact_us i{
+        font-size: 18px;
+    }
+    
+    .contact_cont .form_cont .phone{
+        display:block;
+        width: 100%;
+        grid-column: 1 / 3;
+    }
+    .contact_cont .form_cont .phone .form:first-child{
+        width: 60%;
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+}

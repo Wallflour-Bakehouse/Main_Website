@@ -1,0 +1,58 @@
+.user_dashboard{
+    padding-top: 100px;
+}
+.user_dashboard > .heading{
+    font-size: 28px;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+}
+.user_dashboard > .heading::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40%;
+    transform: translateX(-20%);
+    background-color: var(--lineColour);
+    animation: 2.5s line ease-in-out infinite alternate;
+}
+.user_dashboard .subheading{
+    margin-block: 20px;
+    font-size: 23px;
+}
+.user_dashboard .acc_box{
+    height: 120px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--secondary);
+    border-radius: 5px;
+    background-color: var(--secondary);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    font-size: 20px;
+    color: black;
+}
+.user_dashboard .acc_box:hover{
+    filter: brightness(1.025);
+    border: 2px solid var(--lineColour);
+    transform: scale(1.005);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.user_dashboard .acc_box .img{
+    font-size: 28px;
+    color: black;
+    margin-right: 20px;
+}
+.user_dashboard .orders .img{
+    background-image: url(images/orders.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+}

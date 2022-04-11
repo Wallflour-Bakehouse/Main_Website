@@ -1,0 +1,32 @@
+.error_cont{
+    padding-top: 100px;
+}
+.error_cont .image_cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.error_cont .image_cont .img{
+    height: 69vh;
+    width: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    font-size: 24px;
+}
+.error_cont .content{
+    text-align: center;
+}
+.error_cont .content .heading{
+    font-size: 32px;
+}
+.error_cont .content .text{
+    font-size: 18px;
+}
+.error_cont .content .text a{
+    font-weight: 500;
+    color: var(--lineColour);
+}

@@ -1,0 +1,25 @@
+.carousel__next-button,
+.carousel__back-button{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    outline: none;
+    border: none;
+    background-color: var(--btnColour);
+    padding: 7px 12px;
+    border-radius: 100%;
+    color: white;
+}
+.carousel__next-button{
+    right: 10px;
+}
+.carousel__back-button{
+    left: 10px;
+}
+.carousel__next-button.disabled,
+.carousel__back-button.disabled{
+    filter: brightness(0.5)
+}
+/* .slideInner___2mfX9{
+    border: 2px solid purple;
+} */

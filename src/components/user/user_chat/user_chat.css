@@ -1,0 +1,150 @@
+.user_chat{
+    padding-top: 100px;
+    margin-bottom: 50px;
+}
+
+.user_chat .chat_cont .chat_header{
+    background-color: var(--secondary);
+    padding: 10px 30px;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.user_chat .chat_cont .chat_header .dp{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    margin-right: 20px;
+    background-image: url(logo.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.user_chat .chat_cont .chat_section{
+    padding-inline: 30px;
+    padding-bottom: 20px;
+    height: 65vh;
+    overflow-y: scroll;
+    border: 2px solid var(--secondary);
+    /* background-image: url(https://thumbs.dreamstime.com/b/bakery-seamless-background-baking-doodle-vector-pattern-pastry-sketches-hand-drawn-cakes-pies-wallpaper-bread-objects-157631532.jpg); */
+    /* background-image: url(https://www.teahub.io/photos/full/6-62488_light-abstract-wallpapers-high-definition-for-free-high.jpg); */
+    background-image: url(https://wallpapersmug.com/large/4d7d03/light-colors-geometric-pattern-abstract.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.user_chat .chat_cont .chat_section::-webkit-scrollbar,
+.user_chat .chat_cont .chat_footer textarea::-webkit-scrollbar{
+    width: 0.5vw;
+}
+.user_chat .chat_cont .chat_section::-webkit-scrollbar-thumb,
+.user_chat .chat_cont .chat_footer textarea::-webkit-scrollbar-thumb{
+    border: none;
+    background-color: var(--btnColour);
+    border-radius: 0px;
+}
+.user_chat .chat_cont .chat_section .message{
+    position: relative;
+    padding: 10px 20px;
+    background-color: rgb(245, 245, 245);
+    max-width: 55%;
+    width: fit-content;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    margin-top: 10px;
+    align-self: flex-start;
+    font-size: 14px;
+}
+.user_chat .chat_cont .chat_section .message::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -19px;
+    height: 20px;
+    width: 20px;
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
+    background-color: rgb(245, 245, 245);
+}
+.user_chat .chat_cont .chat_section .message.active{
+    align-self: flex-end;
+    right: 0;
+    border-radius: 10px;
+    border-top-right-radius: 0px;
+    background-color: var(--secondary);
+}
+.user_chat .chat_cont .chat_section .message.active::after{
+    display: none;
+}
+.user_chat .chat_cont .chat_section .message.active::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -19px;
+    height: 20px;
+    width: 20px;
+    clip-path: polygon(0 100%, 100% 0, 0 0);
+    background-color: var(--secondary);
+}
+.user_chat .chat_cont .chat_footer{
+    display: flex;
+    align-items: center;
+    padding: 16px 30px;
+    background-color: var(--secondary);
+    position: relative;
+}
+.user_chat .chat_cont .chat_footer .input{
+    width: 100%;
+}
+.user_chat .chat_cont .chat_footer .input textarea{
+    background-color: var(--body);
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    width: 100%;
+    resize: none;
+}
+.user_chat .chat_cont .chat_footer .send_btn{
+    margin-left: 20px;
+    height: 50px;
+    width: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 100%;
+    color: white;
+    background-color: var(--btnColour);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.user_chat .chat_cont .chat_footer .send_btn.active{
+    animation: bounce 0.5s;
+}
+@keyframes bounce {
+    0%{
+        transform: scale(1.1);
+    }
+    25%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+}
+.user_chat .chat_cont .error_message{
+    font-size: 14px;
+    color: var(--error);
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.25s ease-in-out;
+}
+.user_chat .chat_cont .error_message.active{
+    opacity: 1;
+}

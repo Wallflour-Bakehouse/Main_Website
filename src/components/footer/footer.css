@@ -1,0 +1,190 @@
+.footer.true{
+    display: none;
+}
+.footer{
+    position: relative;
+    background-color: var(--primary);
+    padding: 50px 5vw;
+    padding-bottom: 30px;
+    color: rgb(231, 231, 231);
+    transition: 1s ease-in-out;
+}
+.footer a:hover{
+    cursor: pointer;
+}
+.footer .section1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer .section1 .img{
+    background-image: url(../nav/logo.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 350px;
+    width: 100%;
+}
+.footer .section2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer .section2 .address,
+.footer .section2 .phone,
+.footer .section2 .email{
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    margin-bottom: 25px;
+    color: white;
+}
+.footer .section2 .address span,
+.footer .section2 .phone span,
+.footer .section2 .email span{
+    margin-left: 40px;
+    font-size: 18px;
+}
+.footer .section2 .icon{
+    font-size: 24px;
+}
+.social-icons_footer{
+    display: flex;
+}
+.social-icons_footer a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    margin-right: 15px;
+    transition: all 0.5s ease-in-out;
+}
+.social-icons_footer .fac{
+    color: rgb(231, 231, 231);
+}
+.social-icons_footer .fac:hover{
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    color: rgb(231, 231, 231);
+    transform: translateY(-5px) scale(1.1);
+}
+.social-icons_footer .yt{
+    color: rgb(231, 231, 231);
+}
+.social-icons_footer .yt:hover{
+    background: red;
+    color: rgb(231, 231, 231);
+    transform: translateY(-5px) scale(1.1);
+}
+.social-icons_footer .wht{
+    color: rgb(231, 231, 231);
+}
+.social-icons_footer .wht:hover{
+    background: rgb(0, 158, 47);
+    color: rgb(231, 231, 231);
+    transform: translateY(-5px) scale(1.1);
+}
+.social-icons_footer .linked{
+    color: rgb(231, 231, 231);
+}
+.social-icons_footer .linked:hover{
+    background: #060057;
+    color: rgb(231, 231, 231);
+    transform: translateY(-5px) scale(1.1);
+}
+.footer .section3 .heading{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.footer .section .loc_box{
+    height: 290px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: white;
+}
+.footer .row2{
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 4px solid rgb(255, 255, 255);
+}
+.footer .row2 .company_line{
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+@media only screen and (max-width:991px){
+
+    .phn_modal .modal-body .phn .line{
+        transform: translateX(0%);
+    }
+    .social-icons_footer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer .section1 .img{
+        height: 180px;
+    }
+    .footer .row2 .company_line hide{
+        display: none;
+    }
+    .footer .row2 .company_line .tab{
+        display: block;
+    }
+    .footer .section3 .loc_box{
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width:767px){
+    
+    .footer .section1 .img{
+        height: 70px;
+    }
+}
+
+@media only screen and (max-width:550px){
+
+    .footer .section1 .img{
+        height: 50px;
+    }
+    .footer .row2 .company_line .mob{
+        display: block;
+    }
+    .social-icons_footer a {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+    .social-icons_footer a .fa{
+        line-height: 35px;
+    }
+    .footer .section3 .loc_box{
+        width: 100%;
+    }
+    .footer .section2 .address span,
+    .footer .section2 .phone span,
+    .footer .section2 .email span{
+        margin-left: 25px;
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (max-width:340px){
+
+    .footer .section2 .address span,
+    .footer .section2 .phone span,
+    .footer .section2 .email span{
+        margin-left: 15px;
+    }
+    .footer .section1 img{
+        height: 60px;
+    }
+}

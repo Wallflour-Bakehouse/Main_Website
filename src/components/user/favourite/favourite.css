@@ -1,0 +1,51 @@
+.fav_cont{
+    padding-top: 100px;
+}
+.fav_cont > .heading{
+    position: relative;
+    font-size: 28px;
+    padding-bottom: 5px;
+    margin-bottom: 40px;
+    width: fit-content;
+    overflow: hidden;
+}
+.fav_cont > .heading::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40%;
+    transform: translateX(-20%);
+    background-color: var(--lineColour);
+    animation: 2.5s line ease-in-out infinite alternate;
+}
+.fav_cont .no_favourites{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 30px;
+    border: 2px dashed var(--lineColour);
+    border-radius: 5px; 
+    font-size: 18px;
+}
+.fav_cont .no_favourites .like{
+    margin-inline: 10px;
+    color: white;
+    background-color: var(--btnColour);
+    height: 30px;
+    width: 30px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: 0.5s ease-in-out;
+}
+.fav_cont .no_favourites .like:hover{
+    filter: brightness(1.1);
+    transform: scale(1.1);
+}
+.fav_cont .no_favourites .like.active{
+    background-color: var(--lineColour);
+    transform: scale(1.);
+}

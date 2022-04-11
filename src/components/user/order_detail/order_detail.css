@@ -1,0 +1,47 @@
+.order_detail .status{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.order_detail .ord_status{
+    font-size: 18px;
+}
+.order_detail .ord_status b{
+    font-size: 20px;   
+    color: var(--lineColour);
+}
+.order_detail .row3{
+    margin-top: 50px;
+}
+.order_detail .row3 .heading{
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.order_detail .row3 .add{
+    border: 2px solid var(--lineColour);
+    padding: 30px;
+    border-radius: 5px;
+    color: black;
+    transition: 0.5s ease-in-out;
+}
+.order_detail .row3 .add:hover{
+    transform: scale(1.01);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.order_detail .row3 .add .name{
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.cart .coupon_cont .coupon_code{
+    border: 2px solid var(--lineColour);
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin-inline: 20px;
+    text-align: center;
+    background-color: transparent;
+    min-width: 150px;
+    max-width: 250px;
+}

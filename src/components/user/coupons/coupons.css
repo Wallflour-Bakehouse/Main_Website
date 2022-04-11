@@ -1,0 +1,101 @@
+.coupons_cont{
+    padding-top: 100px;
+}
+.coupons_cont > .heading{
+    font-size: 28px;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+}
+.coupons_cont > .heading::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40%;
+    transform: translateX(-20%);
+    background-color: var(--lineColour);
+    animation: 2.5s line ease-in-out infinite alternate;
+}
+.coupons_cont .search_cont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--body);
+    border-radius: 100px;
+    padding: 10px 20px;
+    padding-right: 10px;
+    width: 100%;
+    margin-top: 40px;
+}
+.coupons_cont .search_cont input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 93%;
+    font-size: 18px;
+}
+.coupons_cont .search_cont input::placeholder{
+    color: rgb(129, 129, 129);
+}
+.coupons_cont .search_cont .search_btn{
+    background-color: var(--btnColour);
+    color: var(--btnFontcolour);
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.coupons_cont .search_cont .search_btn:hover{
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.coupons_cont .coupon{
+    background-color: var(--secondary);
+    padding: 30px 40px;
+    border-radius: 10px;
+    position: relative;
+    height: 200px;
+}
+.coupons_cont .coupon::after,
+.coupons_cont .coupon::before{
+    content: '';
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    background-color: rgb(240,222,255);
+    top: 50%;
+    border-radius: 100%;
+}
+.coupons_cont .coupon::after{
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+.coupons_cont .coupon::before{
+    right: 0;
+    transform: translate(50%, -50%);
+}
+.coupons_cont .coupon .inner_sec{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 7px solid rgb(240,222,255);
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+.coupons_cont .coupon .inner_sec .details{
+    margin-bottom: 7px;
+}
+.coupons_cont .coupon .inner_sec .coupon_code{
+    font-size: 20px;
+}
+.coupons_cont .coupon .inner_sec .coupon_desc{
+    font-size: 14px;
+}

@@ -1,0 +1,64 @@
+.homepage{
+    padding-top: 65px;
+}
+.homepage .section > .heading{
+    font-size: 28px;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+}
+.homepage .section > .heading::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40%;
+    transform: translateX(-20%);
+    background-color: var(--lineColour);
+    animation: 2.5s line ease-in-out infinite alternate;
+}
+@keyframes line {
+    from{
+        transform: translateX(-20%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}
+.homepage .section2 .image{
+    min-height: 60vh; 
+    background-image: url(images/section2.jpg);  
+    background-size: cover;
+    /* background-position: center; */
+    background-repeat: no-repeat;
+}
+.homepage .section2 .content{
+    padding: 80px 5vw;
+    font-size: 16px;
+    text-align: justify;
+}
+.homepage .section2 .content .heading{
+    font-size: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+}
+.homepage .section2 .content .heading::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40%;
+    transform: translateX(-20%);
+    background-color: var(--lineColour);
+    animation: 2.5s line ease-in-out infinite alternate;
+}
+.homepage .section3,
+.homepage .section4,
+.homepage .section5,
+.homepage .section6{
+    padding: 40px 5vw;
+}

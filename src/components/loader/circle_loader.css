@@ -1,0 +1,43 @@
+.circle_Loader{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.homepage .circle_Loader{
+    height: 20vh;
+}
+.circle_Loader .circ{
+    padding: 5px;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle_Loader .circ1{
+    height: 100px;
+    width: 100px;
+    border-top: 3px solid hsl(347, 100%, 50%);
+    animation: rotate 2s ease infinite;
+}
+.circle_Loader .circ2{
+    height: 80px;
+    width: 80px;
+    border-top: 3px solid hsl(140, 77%, 38%);
+    animation: rotate 4s ease infinite;
+}
+.circle_Loader .circ3{
+    height: 60px;
+    width: 60px;
+    border-top: 3px solid rgb(0, 65, 185);
+    animation: rotate 6s ease infinite;
+}
+@keyframes rotate {
+    from{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}

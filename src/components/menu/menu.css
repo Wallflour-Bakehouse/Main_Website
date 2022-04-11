@@ -1,0 +1,30 @@
+.menu_cont{
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.menu_cont .heading{
+    font-size: 36px;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+    text-align: center;
+}
+.menu_cont .heading::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40%;
+    transform: translateX(-20%);
+    background-color: var(--lineColour);
+    animation: 2.5s line ease-in-out infinite alternate;
+}
+
+.menu_cont .section{
+    width: 100%;
+    margin-block: 40px;
+}

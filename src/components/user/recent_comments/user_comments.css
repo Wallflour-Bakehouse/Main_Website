@@ -1,0 +1,75 @@
+.user_comment_cont{
+    padding-top: 100px;
+}
+.user_comment_cont > .heading{
+    font-size: 28px;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+}
+.user_comment_cont > .heading::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40%;
+    transform: translateX(-20%);
+    background-color: var(--lineColour);
+    animation: 2.5s line ease-in-out infinite alternate;
+}
+.user_comment_cont .section{
+    margin-top: 40px;
+}
+.user_comment_cont .section .heading{
+    font-size: 18px;
+}
+.user_comment_cont .add_comment_sec{
+    padding: 30px;
+    display: flex;
+    align-items: center;
+}
+.user_comment_cont .add_comment_sec img{
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+.user_comment_cont .add_comment_sec .form{
+    width: 100%;
+    margin-right: 10px;
+}
+.user_comment_cont .add_comment_sec .form label{
+    font-size: 18px;
+    margin-right: 20px;
+}
+.user_comment_cont .add_comment_sec select{
+    background-color: var(--body);
+    padding: 5px 10px;
+    width: 60px;
+    outline: none;
+    font-size: 16px;
+    border: 1px solid var(--lineColour);
+}
+.user_comment_cont .add_comment_sec textarea{
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--body);
+    height: 70px;
+    padding: 5px 10px;
+    margin-right: 15px;
+    border-bottom: 2px solid transparent;
+    transition: 0.5s ease-in-out;
+}
+.user_comment_cont .add_comment_sec textarea:focus{
+    border-bottom: 2px solid var(--lineColour);
+}
+.user_comment_cont .no_comments{
+    font-size: 20px;
+    text-align: center;
+    margin-block: 10px;
+    padding-block: 20px;
+    border: 2px dashed var(--lineColour);
+    border-radius: 5px;
+}
