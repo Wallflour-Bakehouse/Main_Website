@@ -21,6 +21,7 @@ function AddressBox(props){
     }
 
     function editShippingAddress(item){
+        props.setFormVissible(true)
         props.editAddress({
             id: item._id,
             name: item.name,
@@ -51,16 +52,17 @@ function AddressBox(props){
     }
 
     function addNewAddress(){
+        props.setFormVissible(true)
         props.editAddress({
             id:'',
             name: '',
-            countryCode: '',
+            countryCode: '91',
             phoneNumber: '',
             address: '',
             landmark: '',
-            city: '',
+            city: 'Bangalore',
             pincode: '',
-            state: ''
+            state: 'Karnataka'
         })
     }
 
@@ -85,14 +87,12 @@ function AddressBox(props){
                             </div>
                         </div>
                     )}
-                    { props.formDataId ? (
-                        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                            <div className="add_address" onClick={addNewAddress}>
-                                <div><FontAwesomeIcon icon={faPlus}/></div>
-                                Click Here To Add A New Address
-                            </div>
+                    <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                        <div className="add_address" onClick={addNewAddress}>
+                            <div><FontAwesomeIcon icon={faPlus}/></div>
+                            Click Here To Add A New Address
                         </div>
-                    ):( <></> )}
+                    </div>
                 </>
             ) 
         }
@@ -112,6 +112,7 @@ function AddressBox(props){
 export default function Checkout() {
 
     const [user, setUser] = useState(null)
+    const [formVissible, setFormVissible] = useState(false)
     const [selectedAddress, setSelectedAddress] = useState()
     const [cart, setCart] = useState()
     const [pageError, setPageError] = useState()
@@ -139,6 +140,11 @@ export default function Checkout() {
     useEffect(() => {
         document.title = `WallFlour Bakehouse | Checkout`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_2').classList.add('active')
         try{
             const token = JSON.parse(localStorage.getItem("profile")).token
             axios
@@ -289,15 +295,16 @@ export default function Checkout() {
                         </ol>
                     </nav>
                     <div className="row">
-                        <div className="col-12 col-md-7 save_add">
+                        <div className="col-12 col-lg-7 save_add">
                             <h5><b>Select Delivery Address</b></h5>
                             <div className="container-fluid">
                                 <div className="row">
-                                <AddressBox editAddress={editAddress} address={user.shippingAddress} setSelectedAddress={setSelectedAddress} formDataId={formData.id} />
+                                <AddressBox editAddress={editAddress} address={user.shippingAddress} setSelectedAddress={setSelectedAddress} formDataId={formData.id} setFormVissible={setFormVissible} />
                                 </div>
                             </div>
                             <div className="new_add">
-                            <h5><b>{formData.id ? (<>Edit Shipping Address</>) : (<>Add a New Shipping Address</>) }</b></h5>
+                            {formVissible ? (<>
+                                <h5><b>{formData.id ? (<>Edit Shipping Address</>) : (<>Add a New Shipping Address</>) }</b></h5>
                                 <Form className='mt-4'>
                                     <FormGroup row>
                                         <Label htmlFor="name" lg={3}>Full Name</Label>
@@ -361,27 +368,28 @@ export default function Checkout() {
                                         </Col>
                                     </FormGroup>
                                 </Form>
+                            </>):(<></>)}
                             </div>
                         </div>
-                        <div className="col-12 col-md-5 order_summary">
+                        <div className="col-12 col-lg-5 order_summary">
                             <h5><b>Your Order</b></h5>
                             <div className="container_fluid">
                                 <div className="row header">
-                                    <div className="col-6">Product</div>
+                                    <div className="col-5">Product</div>
                                     <div className="col-3">Quantity</div>
-                                    <div className="col-3">Total</div>
+                                    <div className="col-4">Total</div>
                                 </div>
                                 {cart.cartItems.length>0 ?
                                     (<>
                                         {cart.cartItems.map(item=>
                                             <div className="row content" key={item._id}>
-                                                <div className="col-6">
+                                                <div className="col-5">
                                                     <Link to={`/menu/${item.product.productName}`} style={{color: "var(--lineColour)", textDecoration: "underline"}}>
                                                         {item.product.productName}
                                                     </Link>
                                                 </div>
                                                 <div className="col-3">X {item.quantity}</div>
-                                                <div className="col-3">₹ {item.total}</div>
+                                                <div className="col-4">₹ {item.total}</div>
                                             </div>
                                         )}
                                     </>):(
@@ -390,15 +398,11 @@ export default function Checkout() {
                                         </div>
                                     )
                                 }
-                                <div className="row total">
-                                    <div className="col-8"></div>
-                                    <div className="col-1">Total:</div>
-                                    <div className="col-3">₹ {cart.grandTotal}</div>
-                                </div>
-                                <div className="row grandTotal">
-                                    <div className="col-6"></div>
-                                    <div className="col-3">Grand Total:</div>
-                                    <div className="col-3">₹ {cart.grandTotal}</div>
+                                <div className="row">
+                                    <div className="grandTotal">
+                                        Total:
+                                        <span className="ms-3">₹ {cart.grandTotal}</span>
+                                    </div>
                                 </div>
                                 {   cart.cartItems.length>0 ? (
                                     <div className="row pay_cont" onClick={placeOrder}>

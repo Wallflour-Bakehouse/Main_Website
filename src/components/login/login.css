@@ -142,14 +142,14 @@
 }
 @media only screen and (max-width:550px){
 
-    .form{
-        font-size: 18px;
+    .login_cont .login .form label{
+        font-size: 16px;
     }
     .login_cont .login .form input:focus + .label-name .content-name,
     .login_cont .login .form input:valid + .label-name .content-name {
         font-size: 16px;
     }
     .login_cont .login .submit_cont .submit{
-        font-size: 18px;
+        font-size: 16px;
     }
 }

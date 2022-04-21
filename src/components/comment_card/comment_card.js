@@ -35,13 +35,18 @@ export default function CommentCard({comment, commentReview, setComment, scroll}
 
     if(comment){
         return (
-            <div className="comment_cont" key={comment._id} id={comment._id}>
-                <div className="img" style={{backgroundImage: 'url('+comment.dp+')'}}></div>
+            <div className={"comment_cont"+(commentReview ? " active" : "")} key={comment._id} id={comment._id}>
+                <div className="img full_view" style={{backgroundImage: 'url('+comment.dp+')'}}></div>
                 <div className="comment">
                     <div className="top_line">
-                        <div className="name">{comment.user}</div>
-                        <div className="date">{moment(comment.createdAt).fromNow()}</div>
-                        <div className="rating">My Rating: {comment.rating}/5</div>
+                        <div className="img mob_view" style={{backgroundImage: 'url('+comment.dp+')'}}></div>
+                        <div>
+                            <div className="name">{comment.user}</div>
+                            <div className='date_review'>
+                                <div className="date">{moment(comment.createdAt).fromNow()}</div>
+                                <div className="rating">Rating: {comment.rating}/5</div>
+                            </div>
+                        </div>
                     </div>
                     <div className="bottom_line">
                         <div className="cmt">

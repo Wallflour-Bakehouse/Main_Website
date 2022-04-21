@@ -5,7 +5,6 @@
     position: relative;
     font-size: 28px;
     padding-bottom: 5px;
-    margin-bottom: 40px;
     width: fit-content;
     overflow: hidden;
 }
@@ -48,4 +47,24 @@
 .fav_cont .no_favourites .like.active{
     background-color: var(--lineColour);
     transform: scale(1.);
+}
+
+@media only screen and (max-width: 750px) {
+
+    .fav_cont > .heading{
+        font-size: 24px;
+    }
+    .fav_cont > .heading::after{
+        height: 2px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+    .fav_cont > .heading{
+        font-size: 20px;
+    }
+    .fav_cont > .heading::after{
+        height: 1px;
+    }
 }

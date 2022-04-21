@@ -24,6 +24,11 @@ export default function UserComment() {
     useEffect(() => {
         document.title = `WallFlour Bakehouse | User Comments`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
         try{
             setComment({...comment, user: JSON.parse(localStorage.getItem("profile")).result.username})
             const token = JSON.parse(localStorage.getItem("profile")).token
@@ -79,8 +84,8 @@ export default function UserComment() {
                 </nav>
                 <div className="heading">Recent Comments</div>
                 { comment.productName  ? (
-                    <div className="row">
-                        <div className="col-12 mt-5">
+                    <div className="row mt-4">
+                        <div className="col-12">
                             <h5>Editing Comment on {comment.productName} on {moment(comment.createdAt).format("DD/MM/YYYY")} at {moment(comment.createdAt).format("HH:MM")}</h5>
                             <div className="add_comment_sec">
                                 <img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png" alt="" />
@@ -105,8 +110,8 @@ export default function UserComment() {
                 { comments.length!==0 ? (
                     <div className="row">
                         {comments.map(comment =>
-                            <div className="col-12 section" key={comment._id}>
-                                <div className="heading">You commented on <Link to={`/menu/${comment.productName}`}>{comment.productName}</Link> on {moment(comment.createdAt).format("DD/MM/YYYY")} at {moment(comment.createdAt).format("HH:MM")} </div>
+                            <div className="col-12 section mt-4" key={comment._id}>
+                                <div className="heading mb-2">Comment on <Link to={`/menu/${comment.productName}`}>{comment.productName}</Link> on {moment(comment.createdAt).format("DD/MM/YYYY")} ({moment(comment.createdAt).format("hh:mm A")}) </div>
                                 <CommentCard commentReview={true} comment={comment} setComment={setComment} scroll={false} />
                             </div>
                         )}

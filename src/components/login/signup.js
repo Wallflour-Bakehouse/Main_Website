@@ -23,7 +23,7 @@ const initialState = {
     pincode: '',
     state: ''
 }
-export default function SignUp() {
+export default function SignUp(props) {
 
     const [formData, setFormData] = useState(initialState)
     const [errors, setErrors]= useState(initialState)
@@ -31,8 +31,14 @@ export default function SignUp() {
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     useEffect(()=>{
+        props.setLoginOrSignupText("Signup")
         document.title = `Wallflour Bakehouse | Signup`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
     },[])
 
     function validateForm(){
@@ -197,8 +203,8 @@ export default function SignUp() {
                 <div className="bubble"></div>
             </div>
             <div className="signup container-fluid">
-                <h4>Welcome To Wallflour Bakehouse</h4>
-                <h6>Create An Account</h6>
+                <div className="heading">Welcome To Wallflour Bakehouse</div>
+                <div className="subheading">Create An Account</div>
                 <div className="row">
                     <div className="col-12 col-md-6 mb-1">
                         <div className="form">

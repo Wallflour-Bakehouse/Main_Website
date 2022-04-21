@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
 }
-.menu_cont .heading{
+
+.menu_cont  .heading{
     font-size: 36px;
     position: relative;
     width: fit-content;
@@ -24,7 +25,31 @@
     animation: 2.5s line ease-in-out infinite alternate;
 }
 
+.menu_cont .section  .heading{
+    font-size: 28px;
+}
 .menu_cont .section{
     width: 100%;
-    margin-block: 40px;
+}
+
+@media only screen and (max-width:650px){
+    
+    .menu_cont .heading{
+        font-size: 28px;
+    }
+    .menu_cont .heading::after{
+        height: 2px;
+    }
+    .menu_cont .section  .heading{
+        font-size: 24px;
+    }
+}
+@media only screen and (max-width:450px){
+
+    .menu_cont .heading{
+        font-size: 24px;
+    }
+    .menu_cont .heading::after{
+        height: 1px;
+    }
 }

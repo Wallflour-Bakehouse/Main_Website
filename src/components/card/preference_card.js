@@ -25,7 +25,6 @@ export default function PreferenceCard({preferences, userPreferences, setUserPre
 
         if(pref.contains('active')){
             setUserPreferences(userPreferences.filter((preference)=>{
-
                 return preference!==preferences.preferenceName
             }))
         }
@@ -38,7 +37,7 @@ export default function PreferenceCard({preferences, userPreferences, setUserPre
 
     if(preferences&&calculation){
         return preferences.map((preference) =>
-            <div className="col-6 col-md-3 col-lg-2">
+            <div className="col-6 col-sm-4 col-md-3 col-lg-2 mt-4 d-flex justify-content-center">
                 <div className={"pref_card" + (preference.active ? " active" : "")} id={preference._id} key={preference._id} onClick={()=>active(preference)}>
                     <div className="img" style={{backgroundImage: `url(${preference.image})`}}></div>
                     <div className="text">

@@ -6,7 +6,7 @@ import './login.css'
 import './backgroundAnimation.css'
 
 
-export default function Login() {
+export default function Login(props) {
 
     const [formData, setFormData] = useState({
         'username': "",
@@ -17,8 +17,15 @@ export default function Login() {
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     useEffect(()=>{
+        props.setLoginOrSignupText("Login")
         document.title = `Wallflour Bakehouse | Login`
         window.scrollTo(0, 0)
+        
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
     },[])
 
     function validateForm(){
@@ -50,7 +57,7 @@ export default function Login() {
                 .post(url+'/user/login', formData)
                 .then((res)=>{
                     localStorage.setItem('profile', JSON.stringify(res.data))
-                    window.location.replace('/home')
+                    window.location.replace('/menu')
                 })
                 .catch(()=>{
                     setErrors({...errors, submit: 'Invalid Credentials' })

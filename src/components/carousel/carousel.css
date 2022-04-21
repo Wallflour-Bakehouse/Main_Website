@@ -23,3 +23,11 @@
 /* .slideInner___2mfX9{
     border: 2px solid purple;
 } */
+
+.ad_img{
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

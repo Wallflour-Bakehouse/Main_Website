@@ -169,13 +169,11 @@
     font-size: 17px;
     margin-top: 30px;
 }
-.checkout .order_summary .subtotal,
-.checkout .order_summary .shipping,
-.checkout .order_summary .total{
+.checkout .order_summary .grandTotal{
     font-weight: 500;
-}
-.checkout .order_summary .total{
-    border-top: 2px solid var(--lineColour);
+    display: flex;
+    justify-content: flex-end;
+    padding-block: 15px;
 }
 .checkout .order_summary .grandTotal{
     border-top: 2px solid var(--lineColour);

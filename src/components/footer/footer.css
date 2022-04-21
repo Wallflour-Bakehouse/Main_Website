@@ -64,36 +64,25 @@
     margin-right: 15px;
     transition: all 0.5s ease-in-out;
 }
-.social-icons_footer .fac{
-    color: rgb(231, 231, 231);
+.social-icons_footer .insta{
+    color: white;
 }
-.social-icons_footer .fac:hover{
+.social-icons_footer .insta:hover{
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    color: rgb(231, 231, 231);
     transform: translateY(-5px) scale(1.1);
 }
-.social-icons_footer .yt{
-    color: rgb(231, 231, 231);
+.social-icons_footer .fb{
+    color: white;
 }
-.social-icons_footer .yt:hover{
-    background: red;
-    color: rgb(231, 231, 231);
+.social-icons_footer .fb:hover{
+    background: #4267B2;
     transform: translateY(-5px) scale(1.1);
 }
 .social-icons_footer .wht{
-    color: rgb(231, 231, 231);
+    color: white;
 }
 .social-icons_footer .wht:hover{
     background: rgb(0, 158, 47);
-    color: rgb(231, 231, 231);
-    transform: translateY(-5px) scale(1.1);
-}
-.social-icons_footer .linked{
-    color: rgb(231, 231, 231);
-}
-.social-icons_footer .linked:hover{
-    background: #060057;
-    color: rgb(231, 231, 231);
     transform: translateY(-5px) scale(1.1);
 }
 .footer .section3 .heading{
@@ -119,8 +108,8 @@
 }
 @media only screen and (max-width:991px){
 
-    .phn_modal .modal-body .phn .line{
-        transform: translateX(0%);
+    .footer{
+        padding-bottom: 100px;
     }
     .social-icons_footer{
         display: flex;
@@ -129,9 +118,6 @@
     }
     .footer .section1 .img{
         height: 180px;
-    }
-    .footer .row2 .company_line hide{
-        display: none;
     }
     .footer .row2 .company_line .tab{
         display: block;
@@ -144,15 +130,15 @@
 
 @media only screen and (max-width:767px){
     
-    .footer .section1 .img{
-        height: 70px;
+    .footer{
+        padding-bottom: 90px;
     }
 }
 
 @media only screen and (max-width:550px){
 
-    .footer .section1 .img{
-        height: 50px;
+    .footer{
+        padding-bottom: 70px;
     }
     .footer .row2 .company_line .mob{
         display: block;

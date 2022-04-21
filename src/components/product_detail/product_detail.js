@@ -5,7 +5,7 @@ import Error from '../error/error';
 import CommentCard from '../comment_card/comment_card'
 import Loader from '../loader/loader'
 import { Input } from 'reactstrap'
-import { Link, NavLink, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faHeart } from '@fortawesome/free-solid-svg-icons'
 import {url} from '../../url'
@@ -97,19 +97,21 @@ function CommentsSection({productName, comments}){
             <div className="col-12 mt-5">
                 <h3>Comments</h3>
                 {token ? (<div className="add_comment_sec">
-                    <div className="img" style={{backgroundImage: 'url('+dp+')'}}></div>
-                    <div className='form'>
-                        <div className='mb-2'>
-                            <label htmlFor="">Rating</label>
-                            <select name="rating" onChange={changeComment}>
-                                <option value={5}>5</option>
-                                <option value={4}>4</option>
-                                <option value={3}>3</option>
-                                <option value={2}>2</option>
-                                <option value={1}>1</option>
-                            </select>
+                    <div className="row1">
+                        <div className="img" style={{backgroundImage: 'url('+dp+')'}}></div>
+                        <div className='form'>
+                            <div className='mb-2'>
+                                <label htmlFor="">Rating</label>
+                                <select name="rating" onChange={changeComment}>
+                                    <option value={5}>5</option>
+                                    <option value={4}>4</option>
+                                    <option value={3}>3</option>
+                                    <option value={2}>2</option>
+                                    <option value={1}>1</option>
+                                </select>
+                            </div>
+                            <textarea type="text" placeholder='Add a comment...' name="comment" onChange={changeComment} value={comment.comment} />
                         </div>
-                        <textarea type="text" placeholder='Add a comment...' name="comment" onChange={changeComment} value={comment.comment} />
                     </div>
                     <div className="btn_cont" onClick={postComment}><div className="btn_">Comment</div></div>
                 </div>):(<></>)}
@@ -122,7 +124,7 @@ function CommentsSection({productName, comments}){
                         )}
                     </>
                 ):(
-                    <>
+                    <div className='comment_section'>
                         {userComments.length>0 ? (
                             userComments.map((comment)=>
                                 <CommentCard commentReview={true} comment={comment} setComment={setComment} scroll={false} />
@@ -133,7 +135,7 @@ function CommentsSection({productName, comments}){
                                 <CommentCard commentReview={false} comment={comment} />
                             )
                         ):(<></>)}
-                    </>
+                    </div>
                 )}
             </div>
         )
@@ -217,6 +219,12 @@ export default function ProductDetail() {
     useEffect(() => {
         document.title = `WallFlour Bakehouse | ${prod.prodName}`
         window.scrollTo(0, 0)
+        
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_3').classList.add('active')
         try{
             axios
             .get(url+`/product/${prod.prodName}`)
@@ -295,24 +303,25 @@ export default function ProductDetail() {
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><Link to="/menu">Menu</Link></li>
+                        <li className="breadcrumb-item active">{product.productCategory}</li>
                         <li className="breadcrumb-item active" aria-current="page">{product.productName}</li>
                     </ol>
                 </nav>
                 <div className="row">
-                    <div className="col-12 col-md-6 col-lg-5">
+                    <div className="col-12 col-lg-5 mb-4">
                         <div className="img_cont">
                             <div className="img" style={{backgroundImage: `url(${product.image})`}}></div>
                             <FavouriteButton productId={product._id} favourites={favourites} />
                         </div>
                     </div>
-                    <div className="col-12 col-md-6 col-lg-7">
+                    <div className="col-12 col-lg-7">
                         <div className="content">
                             <div className="heading">
                                 {product.productName}
-                                { product.typeOfDish ==="Veg" ? (
-                                    <div className='type veg'>Veg</div>
+                                { product.typeOfDish ==="veg" ? (
+                                    <span className='type veg'><span className="circ"></span></span>
                                 ):(
-                                    <div className='type nonveg'>Non Veg</div>
+                                    <span className='type nonveg'><span className="circ"></span></span>
                                 )}
                             </div>
                             <div className="rating"><FontAwesomeIcon icon={faStar}/> {product.rating}/5</div>
@@ -321,9 +330,9 @@ export default function ProductDetail() {
                             <div className="batch_size"><b>Batch Size:</b> {product.batchSize}</div>
                             <div className="price_cont">
                                 <div>
-                                    Price:
+                                    <b>Price:</b>
                                     <span className="price ps-2">₹{product.price-(product.price*product.discount*0.01)}</span>
-                                    {product.discount!==0 ? (
+                                    {product.discount>0 ? (
                                         <>  
                                             <span className="discount_price">₹{product.price}</span>
                                             <span className="discount">Save {product.discount}%</span>
@@ -331,7 +340,7 @@ export default function ProductDetail() {
                                     ):(<></>)}
                                 </div>
                                 <div className="qnt">
-                                    <div>Quantity:</div>
+                                    <b>Quantity:</b>
                                     <select name="quantity" onChange={handleChange}>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -341,18 +350,20 @@ export default function ProductDetail() {
                                     </select>
                                 </div>    
                                 {product.discount!==0 ? (
-                                        <>  
-                                            <div className="total">Total: ₹ {(product.price-(product.price*product.discount*0.01))*cartItem.quantity}</div>
-                                        </>
-                                    ):(<>
-                                            <div className="total">Total: ₹ {product.price*cartItem.quantity}</div>
-                                        </>)}
+                                    <>  
+                                        <div className="total"><b>Total:</b> ₹ {(product.price-(product.price*product.discount*0.01))*cartItem.quantity}</div>
+                                    </>
+                                    ):(
+                                    <>
+                                        <div className="total"><b>Total:</b> ₹ {product.price*cartItem.quantity}</div>
+                                    </>
+                                )}
                             </div>
                             <div className="preorder">
                                 <b>Select Delivery Date:</b>
                                 <select name="preOrder" onChange={handleChange}>
                                     {preOrderDates.map((date, i)=>
-                                        <option value={date} id={i}>{date}</option>
+                                        <option value={date} id={i} key={i}>{date}</option>
                                     )}
                                 </select>
                             </div>
@@ -361,10 +372,13 @@ export default function ProductDetail() {
                                     <Input type="textarea" rows="3" name="customisation" autoComplete="off" placeholder="Add Customisation" value={cartItem.customisation} onChange={handleChange} />
                                 </div>
                             ):(<></>)}
-                            <div className="btn_cont">
-                                <div className="btn_" onClick={addToCart}>Add To Cart</div>
-                                <span className="cart_msg">{cartMessage}</span>
-                            </div>
+                            {!product.deleted ? 
+                            (<div className="btn_cont">
+                                <div className="btn_" onClick={addToCart}>
+                                    Add To Cart
+                                </div>
+                                <div className="cart_msg">{cartMessage}</div>
+                            </div>):(<div className="btn_cont">Product has Been Removed</div>)}
                         </div>
                     </div>
                     <CommentsSection productName={product.productName} comments={product.comments} />

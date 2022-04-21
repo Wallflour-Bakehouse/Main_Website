@@ -13,7 +13,7 @@ function AddressBox(props){
 
     function deleteAddress(id){
         try{
-            const token = JSON.parse(localStorage.getItem("profile")).token
+            const token = JSON.parse(localStorage.getItem("profile")).token    
             axios
             .delete(url+'/user/deleteAddress/'+id,{
                 headers: { Authorization: `Bearer ${token}` },
@@ -81,7 +81,7 @@ function AddressBox(props){
                         <b>Phone:</b> +{props.countryCode} - {props.phoneNumber}
                         <p><b>Address: </b>{props.address.address}, {props.address.landmark}, {props.address.city} - {props.address.pincode}, {props.address.state}</p>
                     </div>
-                    <div className="edit" onClick={()=>editBillingAddress(props.address, props.countryCode, props.phoneNumber, props.name)}><FontAwesomeIcon icon={faPenToSquare} /></div>
+                    <a href="#add" className="edit" onClick={()=>editBillingAddress(props.address, props.countryCode, props.phoneNumber, props.name)}><FontAwesomeIcon icon={faPenToSquare} /></a>
                 </div>
             )
         }
@@ -89,12 +89,6 @@ function AddressBox(props){
             if(props.address.length!==0){
                 return(
                     <>
-                        { props.formDataId ? (
-                            <div className="add_address" onClick={addNewAddress}>
-                                <div><FontAwesomeIcon icon={faPlus}/></div>
-                                Click Here To Add A New Address
-                            </div>
-                        ):( <></> )}
                         {props.address.map(item=>
                             <div className="box box_add" key={item._id}>
                                 <div>
@@ -102,10 +96,16 @@ function AddressBox(props){
                                     <b>Phone:</b> +{item.countryCode} - {item.phoneNumber}
                                     <p><b>Address: </b>{item.address}, {item.landmark}, {item.city} - {item.pincode}, {item.state}</p>
                                 </div>
-                                <div className="edit" onClick={()=>editShippingAddress(item)}><FontAwesomeIcon icon={faPenToSquare} /></div>
+                                <a href="#add" className="edit" onClick={()=>editShippingAddress(item)}><FontAwesomeIcon icon={faPenToSquare} /></a>
                                 <div className="delete" onClick={()=>deleteAddress(item._id)}><FontAwesomeIcon icon={faTrashAlt} /></div>
                             </div>
                         )}
+                        { props.formDataId ? (
+                            <a href="#add" className="add_address" onClick={addNewAddress}>
+                                <div><FontAwesomeIcon icon={faPlus}/></div>
+                                Click Here To Add A New Address
+                            </a>
+                        ):( <></> )}
                     </>
                 )
             }
@@ -151,6 +151,11 @@ export default function UserAddress() {
 
     useEffect(() => {
         document.title = `WallFlour Bakehouse | Address`
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
         window.scrollTo(0, 0)
         try{
             const token = JSON.parse(localStorage.getItem("profile")).token
@@ -279,7 +284,7 @@ export default function UserAddress() {
                 </nav>
                 <div className="heading mb-5">Your Address</div>
                 <div className="row">
-                    <div className="col-12 col-md-6 pe-4" style={{borderRight: "2px solid var(--lineColour)"}}>
+                    <div className="col-12 col-md-6 address_view pe-lg-4">
                         <div className="section billing_address">
                             <div className="heading">Billing Address</div>
                             <AddressBox billingAddress={true} setBillingAddressChange={setBillingAddressChange} editAddress={editAddress} address={user.billingAddress} name={user.name} countryCode={user.countryCode} phoneNumber={user.phoneNumber} />
@@ -289,7 +294,7 @@ export default function UserAddress() {
                             <AddressBox billingAddress={false} setBillingAddressChange={setBillingAddressChange} editAddress={editAddress} address={user.shippingAddress} formDataId={formData.id}/>
                         </div>
                     </div>
-                    <div className="col-12 col-md-6 ps-4">
+                    <div id="add" className="col-12 col-md-6 ps-lg-4 mt-4 mt-md-0">
                         <h5><b>{billingAddressChange ? (<>Update Billing Address</>) : (<>{ formData.id ? (<>Edit Shipping Address</>) : (<>Add a New Shipping Address</>)}</>) }</b></h5>
                         <Form className='mt-4'>
                             <FormGroup row>

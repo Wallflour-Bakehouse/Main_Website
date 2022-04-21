@@ -10,7 +10,7 @@ import './home.css'
 export default function Home() {
 
     const [token, setToken] = useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")).token : "")
-    const [favourites, setfavourites] = useState([])
+    const [favourites, setfavourites] = useState()
     const [homeData, setHomeDate] = useState([])
     const [pageError, setPageError] = useState()
 
@@ -18,6 +18,11 @@ export default function Home() {
     useEffect(()=>{
         document.title = `Wallflour Bakehouse | Home`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_1').classList.add('active')
         try{
             if(token){
                 axios
@@ -30,6 +35,9 @@ export default function Home() {
                 .catch(()=>{
                     setPageError(true)
                 })
+            }
+            else{
+                setfavourites(true)
             }
             axios
             .get(url+'/product/getHomeProducts')
@@ -69,7 +77,7 @@ export default function Home() {
                     <div className="heading">New Products</div>  
                     <div className="card_section container mt-3">
                         <div className="row">
-                            {homeData.newProducts ? (
+                            {homeData.newProducts&&favourites ? (
                                 <Card categoryProducts={homeData.newProducts} favourites={favourites}  reload={true} />    
                             ):(
                                 <CircleLoader />
@@ -81,7 +89,7 @@ export default function Home() {
                     <div className="heading">Top Selling</div>  
                     <div className="card_section container mt-3">
                         <div className="row">
-                        {homeData.topSelling ? (
+                        {homeData.topSelling&&favourites ? (
                                 <Card categoryProducts={homeData.topSelling} favourites={favourites}  reload={true} />    
                             ):(
                                 <CircleLoader />
@@ -93,7 +101,7 @@ export default function Home() {
                     <div className="heading">Top Rated</div>  
                     <div className="card_section container mt-3">
                         <div className="row">
-                        {homeData.topRated ? (
+                        {homeData.topRated&&favourites ? (
                                 <Card categoryProducts={homeData.topRated} favourites={favourites}  reload={true} />    
                             ):(
                                 <CircleLoader />
@@ -101,7 +109,7 @@ export default function Home() {
                         </div>
                     </div>  
                 </div>
-                {homeData.recommendation ? (
+                {/* {homeData.recommendation&&favourites ? (
                     <div className="section section5">
                         <div className="heading">Recommended For You</div>  
                         <div className="card_section container mt-3">
@@ -111,7 +119,7 @@ export default function Home() {
                         </div>  
                     </div>
                 ):(<></>)}
-                {homeData.prevOrdered ? (
+                {homeData.prevOrdered&&favourites ? (
                     <div className="section section6">
                         <div className="heading">Previously Ordered</div>  
                         <div className="card_section container mt-3">
@@ -120,8 +128,8 @@ export default function Home() {
                             </div>
                         </div>  
                     </div>
-                ):(<></>)}
-            </div> 
+                ):(<></>)}*/}
+            </div>  
         )
     }
 }

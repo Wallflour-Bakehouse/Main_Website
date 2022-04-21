@@ -10,7 +10,7 @@ import './order.css'
 function OrderCard(props){
 
   return props.orders.map(order=>
-    <div className="col-12 col-md-4 col-ld-3" key={order._id}>
+    <div className="col-12 col-md-6 col-lg-4" key={order._id}>
       <div className="order_card">
         <div className="row_ order_number"><b>Order Number:</b> {order._id}</div>
         <div className="row_ total"><b>Total:</b> ₹{order.grandTotal}</div>
@@ -18,11 +18,12 @@ function OrderCard(props){
           <b>Dishes:</b>
           {order.orderItems.map(prod=>
             <div key={prod.product._id}>
-              {prod.quantity} x {prod.product.productName}: ₹{(prod.product.price-(prod.product.price*prod.product.discount*0.01))*prod.quantity} ({prod.preOrder})
+              {prod.quantity} x {prod.product.productName}: ₹{(prod.product.price-(prod.product.price*prod.product.discount*0.01))*prod.quantity}
             </div>
           )}
         </div>
-        <div className="row_ order_date"><b>Order Date:</b> {moment(order.createdAt).format("DD/MM/YYYY (hh:mm A)")}</div>
+        <div className="row_ order_date"><b>Order Date:</b><br/> {moment(order.createdAt).format("DD/MM/YYYY (hh:mm A)")}</div>
+        <div className="row_ order_date"><b>Delivery Date:</b><br/> {moment(order.createdAt).format("DD/MM/YYYY")}</div>
         {!props.active ? (<div className="row_ order_date"><b>Delivery Date:</b> {order.updatedAt}</div>):(<></>)}
         <Link to={'/user/orders/'+order._id} className="row_ ord_btn_cont">
           <div className="ord_btn">View Details</div>
@@ -41,6 +42,11 @@ export default function UserOrders() {
   useEffect(() => {
     document.title = `WallFlour Bakehouse | Orders`
     window.scrollTo(0, 0)
+    document.querySelectorAll('.mob_list').forEach((ele)=>{
+        if(!ele.classList.contains('active')) return
+        ele.classList.remove('active')
+    })
+    document.getElementById('mob_4').classList.add('active')
     try{
         const token = JSON.parse(localStorage.getItem("profile")).token
         axios

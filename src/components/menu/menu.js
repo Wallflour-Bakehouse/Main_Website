@@ -17,6 +17,11 @@ export default function Menu() {
     useEffect(() => {
         document.title = `Wallflour Bakehouse | Menu`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_3').classList.add('active')
         try{
             axios
             .get(url+'/product/')
@@ -50,14 +55,16 @@ export default function Menu() {
     else if(products&&favourites){
         return (
             <div className="menu_cont container">
-                <div className="heading">Menu</div>
+                <div className="heading mb-3">Menu</div>
                 {products.map((prod)=>(
-                    <div className="row section section1" key={prod._id}>
-                        <div className="col-12">
-                            <div className="heading" style={{fontSize: "28px"}}>{prod.categoryName}</div>
+                    prod.categoryProducts.length > 0 ? (
+                        <div className="row section mb-5" key={prod._id}>
+                            <div className="col-12">
+                                <div className="heading">{prod.categoryName}</div>
+                            </div>
+                            <Card categoryProducts={prod.categoryProducts} favourites={favourites} />    
                         </div>
-                        <Card categoryProducts={prod.categoryProducts} favourites={favourites} />    
-                    </div>        
+                    ):(<></>)
                 ))}
             </div>
         )

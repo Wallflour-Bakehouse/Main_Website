@@ -16,8 +16,13 @@ export default function UserOrderDetail(props) {
     const [pageError, setPageError] = useState()
 
     useEffect(() => {
-        document.title = `WFBH | Order Details`
+        document.title = `Wallflour Bakehouse | Order`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
         try{
             const token = JSON.parse(localStorage.getItem("profile")).token
             axios
@@ -56,21 +61,20 @@ export default function UserOrderDetail(props) {
                     <div className="ord_status"><b>Payment:</b> {order.paymentStatus ? (<>{order.paymentStatus ==="Paid" ? ("Amount Recieved"):(<Link>Click Here To Make payment</Link>)}</>):("Waiting for Accepting Order")}</div>
                 </div>
                 <div className="row heading">
-                    <div className="col-3 col-md-4 col-lg-5">Product</div>
+                    <div className="col-4 col-md-4 col-lg-5">Product</div>
                     <div className="col-2 col-md-2 col-lg-2">Price</div>
-                    <div className="col-2 col-md-2 col-lg-3">Quantity</div>
-                    <div className="col-2 col-md-2 col-lg-2">Total</div>
+                    <div className="col-3 col-md-2 col-lg-3">Quantity</div>
+                    <div className="col-3 col-md-2 col-lg-2">Total</div>
                 </div>
                 {order.orderItems.map(item=>
                     <div className="row cart_item pt-3 pb-3" key={item._id}>
                         <div className="col-4 col-md-4 col-lg-5 img_cont">
                             {item.customisation ? (<div className="customisation" onClick={()=>props.triggerModal("Customisation", item.customisation)}><FontAwesomeIcon icon={faMessage} /> </div>):(<></>)}
                             <Link to={`/menu/${item.product.productName}`} ><img src={item.product.image} alt="Reload"/></Link>
-                            <div>
+                            <div style={{textAlign: "center"}}>
                                 <Link to={`/menu/${item.product.productName}`} className="detail">{item.product.productName} </Link>
                                 {item.preOrder ? (
                                     <span className="preorder">
-                                        <FontAwesomeIcon icon={faCalendarDay} />
                                         <div className="text">Delivery: {item.preOrder}</div>
                                     </span>
                                 ):(<></>)}
@@ -97,13 +101,13 @@ export default function UserOrderDetail(props) {
                 </div>):(<></>)}
                 <div className="row">
                     <div className="total_cont">
-                        <div>Total</div>
-                        <div className="total">₹ {order.grandTotal}</div>
+                        <b>Total:</b>
+                        <div className="total ms-3">₹ {order.grandTotal}</div>
                     </div>
                 </div>
-                <div className="row row3">
-                    <div className="col-12 col-md-6 p-3">
-                        <div className="add bill_add">
+                <div className="row row3 mt-5">
+                    <div className="col-12 col-md-6">
+                        <div className="add bill_add p-3 p-md-4 mb-4">
                             <div className="heading">Billing Address</div>
                             <div className="name">Name: {order.user.firstname} {order.user.lastname}</div>
                             <div className="name">Phone: +{order.user.countryCode} - {order.user.phoneNumber}</div>
@@ -111,8 +115,8 @@ export default function UserOrderDetail(props) {
                             <p>{order.user.billingAddress.address}, {order.user.billingAddress.landmark}, {order.user.billingAddress.city} - {order.user.billingAddress.pincode}, {order.user.billingAddress.state}</p>
                         </div>
                     </div>
-                    <div className="col-12 col-md-6 p-3">
-                        <div className="add ship_add">
+                    <div className="col-12 col-md-6">
+                        <div className="add ship_add p-3 p-md-4">
                             <div className="heading">Shipping Address</div>
                             <div className="name">Name: {order.shippingAddress.name}</div>
                             <div className="name">Phone: +{order.shippingAddress.countryCode} - {order.shippingAddress.phoneNumber}</div>

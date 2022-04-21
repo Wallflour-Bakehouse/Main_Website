@@ -22,6 +22,11 @@ export default function Favourite() {
     useEffect(()=>{
         document.title = `WallFlour Bakehouse | Favourites`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
         try{
             const token = JSON.parse(localStorage.getItem("profile")).token
             axios

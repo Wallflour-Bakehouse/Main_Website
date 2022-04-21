@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import CircleLoader from '../loader/circle_loader'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhone, faEnvelope, faLocationArrow, faMessage } from '@fortawesome/free-solid-svg-icons'
-import { faYoutube, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faPhone, faEnvelope, faLocationArrow } from '@fortawesome/free-solid-svg-icons'
+import { faYoutube, faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import {url} from '../../url'
 import './contactus.css'
+import { Redirect } from 'react-router-dom'
 
 function Form(){
 
@@ -25,6 +26,12 @@ function Form(){
 
     useEffect(() => {
         document.title = `Wallflour Bakehouse | Contact Us`
+        window.scrollTo(0,0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_5').classList.add('active')
         window.scrollTo(0, 0)
         try{
             if(token){
@@ -129,45 +136,7 @@ function Form(){
     if(user){
         if(user.username!==''){
             return(
-                <form className="form_cont" id="contact-form" method="post">
-                    <div className="name">
-                        <div className="form">
-                            <input style={{color:'black'}} type="text" id="n" name="name" value={user.firstname+" "+user.lastname}/>
-                            <label htmlFor="name" className="label-name">
-                                <span className="content-name">Full Name<span style={{color:'red'}}>*</span></span>
-                            </label>                           
-                        </div>
-                    </div>
-                    <div className="email">
-                        <div className="form">
-                            <input style={{color:'black'}} type="text" id="e" name="email" value={user.email} />
-                            <label htmlFor="name" className="label-name">
-                                <span className="content-name">Email<span style={{color:'red'}}>*</span></span>
-                            </label>                           
-                        </div>
-                    </div>
-                    <div className="phone">
-                        <div className="form">
-                            <input style={{color:'black'}} type="number" name="countryCode" value={user.countryCode} />
-                            <label htmlFor="name" className="label-name">
-                                <span className="content-name">Country Code<span style={{color:'red'}}>*</span></span>
-                            </label>                           
-                        </div>
-                        <div className="form">
-                            <input style={{color:'black'}} type="number" name="phoneNumber" value={user.phoneNumber} />
-                            <label htmlFor="name" className="label-name">
-                                <span className="content-name">Phone Number<span style={{color:'red'}}>*</span></span>
-                            </label>                           
-                        </div>
-                    </div>
-                    <div className="notes field">
-                        <p className="heading">Message</p>
-                        <textarea name="message" placeholder="Enter Your Message Here" onChange={handleChange} required></textarea>
-                        <div id="error_message" className='form_error'>{errors.message}</div>
-                    </div>
-                    <div className="submit" onClick={()=>handleSubmit(false)}>Send Message</div>
-                    <div id="error_submit" className='confirmation'>{errors.submit}</div>
-                </form>
+                <Redirect to="/error" />
             )
         }else{
             return(
@@ -223,7 +192,7 @@ function Form(){
 }
 export default function Contact() {
     return (
-        <div className="container-fluid contact_cont">
+        <div className="container-fluid contact_cont mb-5">
             <div className="heading">Get In Touch With Us</div>
             <div className="row">
                 <div className="col-12 col-lg-6 section1">
@@ -235,18 +204,18 @@ export default function Contact() {
                             <p className="big">You can also reach us by:</p>
                         </div>
                         <div className="contact_us">
-                            <div className="reach phone"><FontAwesomeIcon icon={faPhone} /> <a href="#">+91 9999999999</a></div>
-                            <div className="reach email"><FontAwesomeIcon icon={faEnvelope} /> <a href="mailto:" target="_blank">email@email.com</a></div>
-                            <div className="reach address"><FontAwesomeIcon icon={faLocationArrow} /> <a href="https://www.google.com/maps/place/Alpha+Emerald/@13.0581743,77.6453443,17z/data=!3m1!4b1!4m5!3m4!1s0x3bae17567a01a12d:0x956a1b1ffb811494!8m2!3d13.0581735!4d77.6475331" target="_blank">Address</a></div>
+                            <div className="reach phone"><FontAwesomeIcon icon={faPhone} /> <a href="tel:+919740096628">+91 9740096628</a></div>
+                            <div className="reach email"><FontAwesomeIcon icon={faEnvelope} /> <a href="mailto:wallflourbakehouse@gmail.com" target="_blank">wallflourbakehouse@gmail.com</a></div>
+                            <div className="reach address"><FontAwesomeIcon icon={faLocationArrow} /> <a href="https://goo.gl/maps/8hp7DEGMuDjvznqn9" target="_blank">Satya Greens Apartment, Kodigehalli, Thindlu, Bangalore 560097</a></div>
                         </div>
                         <div className="social">
                             <div className="socialcontainer">
                                 <div className="social-icons">
-                                    <a className="mob" href="/user/chat"><FontAwesomeIcon icon={faMessage} /></a>            
-                                    <a className="loc" target="blank" href=""><FontAwesomeIcon icon={faFacebook} /></a>
-                                    <a className="mail" target="blank" href="mailto:"><FontAwesomeIcon icon={faEnvelope} /></a>
+                                    <a className="what" target="blank" href="https://wa.me/919740096628"><FontAwesomeIcon icon={faWhatsapp} /></a>
+                                    <a className="insta" target="blank" href="https://www.instagram.com/wallflour_bakehouse/"><FontAwesomeIcon icon={faInstagram} /></a>
+                                    <a className="fb" target="blank" href="#"><FontAwesomeIcon icon={faFacebook} /></a>
+                                    <a className="mail" target="blank" href="mailto:wallflourbakehouse@gmail.com"><FontAwesomeIcon icon={faEnvelope} /></a>
                                     <a className="yt" target="blank" href="#"><FontAwesomeIcon icon={faYoutube} /></a>
-                                    <a className="link" target="blank" href="#"><FontAwesomeIcon icon={faInstagram} /></a>
                                 </div>
                             </div>
                         </div>

@@ -1,19 +1,32 @@
-.user_chat{
-    padding-top: 100px;
-    margin-bottom: 50px;
+.chat_cont{
+    max-height: 100vh;
+    min-height: 100vh;
+    height: 100vh;
+    /* background-image: url(https://thumbs.dreamstime.com/b/bakery-seamless-background-baking-doodle-vector-pattern-pastry-sketches-hand-drawn-cakes-pies-wallpaper-bread-objects-157631532.jpg); */
+    /* background-image: url(https://www.teahub.io/photos/full/6-62488_light-abstract-wallpapers-high-definition-for-free-high.jpg); */
+    background-image: url(https://wallpapersmug.com/large/4d7d03/light-colors-geometric-pattern-abstract.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 70px;
 }
-
-.user_chat .chat_cont .chat_header{
+.chat_cont .chat_header{
     background-color: var(--secondary);
     padding: 10px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
     font-size: 20px;
     font-weight: 500;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
-.user_chat .chat_cont .chat_header .dp{
-    height: 50px;
-    width: 50px;
+.chat_cont .chat_header .dp{
+    min-width: 50px;
+    min-height: 50px;
     border-radius: 100%;
     margin-right: 20px;
     background-image: url(logo.jpeg);
@@ -21,38 +34,54 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.user_chat .chat_cont .chat_section{
-    padding-inline: 30px;
-    padding-bottom: 20px;
-    height: 65vh;
+.chat_cont .chat_header .left{
+    display: flex;
+    align-items: center;
+}
+.chat_cont .chat_header .right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    max-width: 100px;
+    min-width: 60px;
+}
+.chat_cont .chat_header .right .social{
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.chat_cont .chat_header .right .social.phone:hover{
+    transform: scale(1)!important;
+}
+.chat_cont .chat_header .right .social:hover{
+    transform: scale(1.1);
+}
+.chat_cont .chat_section{
+    padding-inline: 20px;
+    padding-bottom: 10px;
+    height: 87%;
     overflow-y: scroll;
-    border: 2px solid var(--secondary);
-    /* background-image: url(https://thumbs.dreamstime.com/b/bakery-seamless-background-baking-doodle-vector-pattern-pastry-sketches-hand-drawn-cakes-pies-wallpaper-bread-objects-157631532.jpg); */
-    /* background-image: url(https://www.teahub.io/photos/full/6-62488_light-abstract-wallpapers-high-definition-for-free-high.jpg); */
-    background-image: url(https://wallpapersmug.com/large/4d7d03/light-colors-geometric-pattern-abstract.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    border: 3px solid var(--secondary);
+    border-bottom: none;
     display: flex;
     flex-direction: column;
 }
 
-.user_chat .chat_cont .chat_section::-webkit-scrollbar,
-.user_chat .chat_cont .chat_footer textarea::-webkit-scrollbar{
-    width: 0.5vw;
+.chat_cont .chat_section::-webkit-scrollbar,
+.chat_cont .chat_footer textarea::-webkit-scrollbar{
+    width: 0.4vw;
+    min-width: 3px;
 }
-.user_chat .chat_cont .chat_section::-webkit-scrollbar-thumb,
-.user_chat .chat_cont .chat_footer textarea::-webkit-scrollbar-thumb{
+.chat_cont .chat_section::-webkit-scrollbar-thumb,
+.chat_cont .chat_footer textarea::-webkit-scrollbar-thumb{
     border: none;
-    background-color: var(--btnColour);
-    border-radius: 0px;
+    background-color: var(--lineColour);
 }
-.user_chat .chat_cont .chat_section .message{
+.chat_cont .chat_section .message{
     position: relative;
     padding: 10px 20px;
     background-color: rgb(245, 245, 245);
-    max-width: 55%;
+    max-width: 65%;
     width: fit-content;
     border-radius: 10px;
     border-top-left-radius: 0px;
@@ -60,58 +89,65 @@
     align-self: flex-start;
     font-size: 14px;
 }
-.user_chat .chat_cont .chat_section .message::after{
+.chat_cont .chat_section .message::after{
     content: '';
     position: absolute;
     top: 0;
-    left: -19px;
-    height: 20px;
-    width: 20px;
+    left: -9px;
+    height: 15px;
+    width: 10px;
     clip-path: polygon(100% 0, 100% 100%, 0 0);
     background-color: rgb(245, 245, 245);
 }
-.user_chat .chat_cont .chat_section .message.active{
+.chat_cont .chat_section .message.active{
     align-self: flex-end;
     right: 0;
     border-radius: 10px;
     border-top-right-radius: 0px;
     background-color: var(--secondary);
 }
-.user_chat .chat_cont .chat_section .message.active::after{
+.chat_cont .chat_section .message.active::after{
     display: none;
 }
-.user_chat .chat_cont .chat_section .message.active::before{
+.chat_cont .chat_section .message.active::before{
     content: '';
     position: absolute;
     top: 0;
-    right: -19px;
-    height: 20px;
-    width: 20px;
+    right: -9px;
+    height: 15px;
+    width: 10px;
     clip-path: polygon(0 100%, 100% 0, 0 0);
     background-color: var(--secondary);
 }
-.user_chat .chat_cont .chat_footer{
+.chat_cont .chat_footer{
     display: flex;
     align-items: center;
-    padding: 16px 30px;
+    padding: 15px;
     background-color: var(--secondary);
-    position: relative;
+    height: 12%;
+    max-height: 80px;
+    min-height: 50px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-.user_chat .chat_cont .chat_footer .input{
+.chat_cont .chat_footer .input{
     width: 100%;
+    height: 100%;
 }
-.user_chat .chat_cont .chat_footer .input textarea{
+.chat_cont .chat_footer .input textarea{
     background-color: var(--body);
     outline: none;
     border: none;
     padding: 5px 10px;
     width: 100%;
-    resize: none;
+    height: 100%;
 }
-.user_chat .chat_cont .chat_footer .send_btn{
+.chat_cont .chat_footer .send_btn{
     margin-left: 20px;
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     display: grid;
     place-items: center;
     border-radius: 100%;
@@ -119,8 +155,12 @@
     background-color: var(--btnColour);
     cursor: pointer;
     transform: scale(1.1);
+    transition: 0.5s ease-in-out;
 }
-.user_chat .chat_cont .chat_footer .send_btn.active{
+.chat_cont .chat_footer .send_btn:hover{
+    transform: scale(1.2);
+}
+.chat_cont .chat_footer .send_btn.active{
     animation: bounce 0.5s;
 }
 @keyframes bounce {
@@ -137,7 +177,7 @@
         transform: scale(1.1);
     }
 }
-.user_chat .chat_cont .error_message{
+.chat_cont .error_message{
     font-size: 14px;
     color: var(--error);
     position: absolute;
@@ -145,6 +185,38 @@
     opacity: 0;
     transition: 0.25s ease-in-out;
 }
-.user_chat .chat_cont .error_message.active{
+.chat_cont .error_message.active{
     opacity: 1;
+}
+
+@media only screen and (max-width: 700px) {
+    
+    .chat_cont .chat_section .message{
+        max-width: 75%;
+        padding: 10px;
+    }
+    .chat_cont .chat_header{
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+}
+
+@media only screen and (max-width: 550px) {
+
+    .chat_cont .chat_section .message{
+        max-width: 90%;
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    .chat_cont .chat_header{
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .chat_cont .chat_header .dp{
+        margin-right: 10px;
+    }
+    .chat_cont .chat_header .right{
+        font-size: 18px;
+    }
 }

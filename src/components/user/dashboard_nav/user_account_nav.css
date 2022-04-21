@@ -22,10 +22,12 @@
     margin-block: 20px;
     font-size: 23px;
 }
+.user_dashboard .col-6{
+    padding: 5px;
+}
 .user_dashboard .acc_box{
-    height: 120px;
+    padding-block: 50px;
     width: 100%;
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,11 +50,55 @@
     color: black;
     margin-right: 20px;
 }
-.user_dashboard .orders .img{
-    background-image: url(images/orders.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 40px;
-    width: 40px;
+
+@media only screen and (max-width: 750px) {
+
+    
+    .user_dashboard > .heading{
+        font-size: 24px;
+    }
+    .user_dashboard .subheading{
+        margin-block: 20px;
+        font-size: 20px;
+    }
+    .user_dashboard > .heading::after{
+        height: 2px;
+    }
+    .user_dashboard .acc_box{
+        padding-block: 40px;
+        flex-direction: column;
+        font-size: 20px;
+    }
+    .user_dashboard .acc_box .img{
+        font-size: 24px;
+        margin-right: 0;
+    }
+    .user_dashboard .col-12{
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    
+    .user_dashboard > .heading{
+        font-size: 22px;
+    }
+    .user_dashboard .subheading{
+        margin-block: 15px;
+        font-size: 18px;
+    }
+    .user_dashboard > .heading::after{
+        height: 1px;
+    }
+    .user_dashboard .acc_box{
+        padding-block: 20px;
+        font-size: 16px;
+    }
+    .user_dashboard .acc_box .img{
+        font-size: 20px;
+        margin-right: 0;
+    }
+    .user_dashboard .col-6{
+        padding: 2px;
+    }
 }

@@ -30,3 +30,17 @@
     font-weight: 500;
     color: var(--lineColour);
 }
+
+@media only screen and (max-width:550px){
+    
+    .error_cont .content .heading{
+        font-size: 24px;
+    }
+    .error_cont .content .text{
+        font-size: 16px;
+    }
+    .error_cont .image_cont .img{
+        height: 40vh;
+        font-size: 18px;
+    }
+}

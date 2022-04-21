@@ -7,17 +7,24 @@
     align-items: center;
     background: white;
     background: linear-gradient(50deg, rgb(182,140,222), rgb(162,124,198), rgb(141,109,173), rgb(121,93,148));
-    animation: moveback 420s ease infinite;
-    background-size: 420%;
 }
 
 .signup_cont .signup{
+    max-width: 1000px;
     position: relative;
     z-index: 1;
-    padding: 50px;
-    width: 60vw;
+    padding: 5vw;
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    margin: 0;
+}
+.signup_cont .signup .heading{
+    font-size: 24px;
+    font-weight: 500;
+}
+.signup_cont .signup .subheading{
+    font-size: 18px;
+    font-weight: 500;
 }
 .signup_cont .signup.error{
     animation: error 0.3s;
@@ -172,16 +179,31 @@
 .signup_cont .signup .msg:hover{
     color: var(--btnColour);
 }
-@media only screen and (max-width:550px){
+@media only screen and (max-width:650px){
 
-    .form{
-        font-size: 18px;
+    .signup_cont .signup .form label{
+        font-size: 16px;
     }
     .signup_cont .signup .form input:focus + .label-name .content-name,
     .signup_cont .signup .form input:valid + .label-name .content-name {
         font-size: 16px;
     }
     .signup_cont .signup .submit_cont .submit{
+        font-size: 16px;
+    }
+    .signup_cont .signup .heading{
+        font-size: 20px;
+    }
+    .signup_cont .signup .subheading{
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width:450px){
+
+    .signup_cont .signup .heading{
         font-size: 18px;
+    }
+    .signup_cont .signup .subheading{
+        font-size: 14px;
     }
 }

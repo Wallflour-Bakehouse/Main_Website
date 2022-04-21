@@ -71,7 +71,7 @@ export default function Error(props) {
                             {props.login ? (
                                 <div className="text">Click here to <Link to="/login">Login</Link> or <Link to="/signup">Sign up</Link></div>
                             ):(
-                                <div className="text">Go to our <Link to="/home">Homepage</Link> or <Link to="/menu">Menu</Link></div>
+                                <div className="text">Go to our <Link to="/">Homepage</Link> or <Link to="/menu">Menu</Link></div>
                             )}
                         </div>
                         <div className="image_cont">

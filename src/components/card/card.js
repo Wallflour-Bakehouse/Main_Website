@@ -62,45 +62,47 @@ export default function Card({ categoryProducts, favourites, reload }) {
     }
 
     if(categoryProducts&&calculation){
+        
         return categoryProducts.map((prod)=>
-            <div className="col-12 col-md-4 col-lg-3" key={prod._id}>
-                <div className='food_main_card '>
-                    <Link to={`/menu/${prod.productName}`}>
-                        <div className="food_card">
-                            <div className="img_cont">
-                                <div className="img" style={{backgroundImage: `url(${prod.image})`}}></div>
+            !prod.deleted ? (
+                <div className="col-6 col-md-4 col-lg-3 card_cont_" key={prod._id}>
+                    <div className='food_main_card '>
+                        <Link to={`/menu/${prod.productName}`}>
+                            <div className="food_card">
+                                <div className="img_cont">
+                                    <div className="img" style={{backgroundImage: `url(${prod.image})`}}></div>
+                                </div>
+                                <div className="food_name">{prod.productName}</div>
+                                <div className="food_categories">
+                                    { prod.comments.length===0 ? (
+                                        <div className="food_reviews"><div><FontAwesomeIcon icon={faStar} />{prod.rating}/5</div><span>(No Reviews)</span></div>
+                                    ):(
+                                        <div className="food_reviews"><div><FontAwesomeIcon icon={faStar} />{prod.rating}/5</div><span>({prod.comments.length} Reviews)</span></div>
+                                    )}
+                                    { prod.typeOfDish ==="veg" ? (
+                                        <div className='type veg'><div className="circ"></div></div>
+                                    ):(
+                                        <div className='type nonveg'><div className="circ"></div></div>
+                                    )}
+                                </div>
+                                <div className="price_cont">
+                                    <div className="price">₹{prod.price-(prod.price*prod.discount*0.01)}</div>
+                                    {prod.discount>0 ? (
+                                        <div className='discount_cont'>  
+                                            <div className="discount_price">₹{prod.price}</div>
+                                            <div className="discount">Save {prod.discount}%</div>
+                                        </div>
+                                    ):(<></>)}
+                                </div>
+                            </div> 
+                        </Link>
+                        {token ? (
+                            <div className={"like "+(prod.active ? "active" : "")} id={prod._id} onClick={()=>manageProductFavourites(prod._id)}>
+                                <FontAwesomeIcon icon={faHeart} />
                             </div>
-                            <div className="food_name">{prod.productName}</div>
-                            <div className="food_categories">
-                                { prod.comments.length===0 ? (
-                                    <div className="food_reviews"><FontAwesomeIcon icon={faStar} />{prod.rating}/5 (No reviews)</div>
-                                ):(
-                                    <div className="food_reviews"><FontAwesomeIcon icon={faStar} />{prod.rating}/5 ({prod.comments.length} { prod.comments.length===1 ? <>review</>:<>reviews</> })</div>
-                                )}
-                                { prod.typeOfDish ==="Veg" ? (
-                                    <div className='type veg'>Veg</div>
-                                ):(
-                                    <div className='type nonveg'>Non Veg</div>
-                                )}
-                            </div>
-                            <div className="price_cont">
-                                <div className="price">₹{prod.price-(prod.price*prod.discount*0.01)}</div>
-                                {prod.discount!==0 ? (
-                                    <>  
-                                        <div className="discount_price">₹{prod.price}</div>
-                                        <div className="discount">Save {prod.discount}%</div>
-                                    </>
-                                ):(<></>)}
-                            </div>
-                        </div> 
-                    </Link>
-                    {token ? (
-                        <div className={"like "+(prod.active ? "active" : "")} id={prod._id} onClick={()=>manageProductFavourites(prod._id)}>
-                            <FontAwesomeIcon icon={faHeart} />
-                        </div>
-                    ):(<></>)}
-                </div>    
-            </div>
+                        ):(<></>)}
+                    </div>    
+                </div>):(<></>)
         )
     }
     else{

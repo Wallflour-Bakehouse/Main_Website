@@ -6,7 +6,7 @@ import Loader from '../loader/loader'
 import { Link, Redirect } from 'react-router-dom'
 import './preference.css'
 
-export default function Preference() {
+export default function Preference(props) {
 
     const [preferences, setPreferences] = useState()
     const [userPreferences , setUserPreferences] = useState([])
@@ -14,10 +14,15 @@ export default function Preference() {
     const [pageError, setPageError] = useState()
 
     useEffect(() => {
+        props.setLoginOrSignupText("Signup")
         document.title = `Wallflour Bakehouse | Set Preference`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
         try{
-            const token = JSON.parse(localStorage.getItem("profile")).token
             axios
             .get(url+'/preference/')
             .then((res)=>{

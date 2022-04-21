@@ -35,7 +35,7 @@ function DpOptionCard({images, setUser, user}){
     }
 
     return images.map(image=>
-        <div className="col-6 col-md-3 col-lg-2 mt-2" key={image._id}>
+        <div className="col-4 col-md-3 col-lg-2 mt-2 d-flex justify-content-center p-2" key={image._id}>
             <div className="dp_opt_card" id={image._id} onClick={()=>setDp(image)} style={{backgroundImage: 'url('+image.dp+')'}}></div>
         </div>
     )
@@ -77,6 +77,11 @@ export default function Account(props) {
     useEffect(() => {
         document.title = `WallFlour Bakehouse | Account`
         window.scrollTo(0, 0)
+        document.querySelectorAll('.mob_list').forEach((ele)=>{
+            if(!ele.classList.contains('active')) return
+            ele.classList.remove('active')
+        })
+        document.getElementById('mob_4').classList.add('active')
         try{
             const token = JSON.parse(localStorage.getItem("profile")).token
             axios
@@ -291,11 +296,11 @@ export default function Account(props) {
                         </FormGroup>
                         <FormGroup row>
                             <Label htmlFor="phone" lg={2}>Phone Number</Label>
-                            <Col  lg={3} >
+                            <Col xs={4} lg={3} >
                                 <Input type="input"  id="countrycode" name="countryCode" autoComplete="off" placeholder="Country Code" value={user.countryCode} onChange={handleInputChange} />
                                 <div id="error_countryCode" className='form_error'>{errors.countryCode}</div>
                             </Col>
-                            <Col  lg={7} >
+                            <Col xs={8} lg={7} >
                                 <Input type="input"  id="phonenumber" name="phoneNumber" autoComplete="off" placeholder="Phone Number" value={user.phoneNumber} onChange={handleInputChange} />
                                 <div id="error_phoneNumber" className='form_error'>{errors.phoneNumber}</div>
                             </Col>

@@ -1,5 +1,5 @@
 .contact_cont{
-    padding: 100px 5vw 80px 5vw!important;
+    padding: 100px 5vw 0px 5vw!important;
     max-width: 1800px;
 }
 .contact_cont > .heading{
@@ -240,9 +240,9 @@
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 }
-.contact_cont .social-icons .mob{
-    color: var(--lineColour);
-    animation-name: mob;
+.contact_cont .social-icons .what{
+    color: rgb(0, 158, 47);
+    animation-name: what;
     animation-direction: normal;
     animation-duration: 10s;
     animation-fill-mode: forwards;
@@ -250,31 +250,26 @@
     animation-play-state: running;
     animation-timing-function: linear;
 }
-@keyframes mob{
+@keyframes what{
     0%{
-        color: var(--lineColour);
+        color: rgb(0, 158, 47);
         background-color: transparent;
         transform: scale(1);
     }
     10%{
-        background: var(--lineColour);
+        background: rgb(0, 158, 47);
         color: white;
         transform: scale(1.1);
     }
     20%{
-        color: var(--lineColour);
+        color: rgb(0, 158, 47);
         background-color: transparent;
         transform: scale(1);
     }
 }
-.contact_cont .social-icons .mob:hover{
-    background: var(--lineColour);
-    color: white;
-    transform: translateY(-10px) scale(1.1);
-}
-.contact_cont .social-icons .loc{
-    color: #4267B2;
-    animation-name: loc;
+.contact_cont .social-icons .insta{
+    color: #E1306C;
+    animation-name: insta;
     animation-direction: normal;
     animation-duration: 10s;
     animation-fill-mode: forwards;
@@ -282,24 +277,61 @@
     animation-play-state: running;
     animation-timing-function: linear;
 }
-@keyframes loc{
+@keyframes insta{
     20%{
-        color: #4267B2;
+        transform: scale(1);
+        color: #E1306C;
+        background-color: transparent;
+    }
+    30%{
+        transform: scale(1.1);
+        background-color: #E1306C;
+        color: white;
+    }
+    40%{
+        color: #E1306C;
         background-color: transparent;
         transform: scale(1);
     }
-    30%{
-        background-color: #4267B2;
-        color: white;
-        transform: scale(1.1);
-    }
+}
+.contact_cont .social-icons .insta:hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    color: white;
+    transform: translateY(-10px) scale(1.1);
+}
+.contact_cont .social-icons .what:hover{
+    background: rgb(0, 158, 47);
+    color: white;
+    transform: translateY(-10px) scale(1.1);
+}
+.contact_cont .social-icons .fb{
+    color: #4267B2;
+    animation-name: fb;
+    animation-direction: normal;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+@keyframes fb{
     40%{
         color: #4267B2;
         background-color: transparent;
         transform: scale(1);
     }
+    50%{
+        background-color: #4267B2;
+        color: white;
+        transform: scale(1.1);
+    }
+    60%{
+        color: #4267B2;
+        background-color: transparent;
+        transform: scale(1);
+    }
 }
-.contact_cont .social-icons .loc:hover{
+.contact_cont .social-icons .fb:hover{
     background: #4267B2;
     color: white;
     transform: translateY(-10px) scale(1.1);
@@ -315,17 +347,17 @@
     animation-timing-function: linear;
 }
 @keyframes mail{
-    40%{
+    60%{
         color: #c71610;
         background-color: transparent;
         transform: scale(1);
     }
-    50%{
+    70%{
         background-color: #c71610;
         transform: scale(1.1);
         color: white;
     }
-    60%{
+    80%{
         color: #c71610;
         background-color: transparent;
         transform: scale(1);
@@ -347,17 +379,17 @@
     animation-timing-function: linear;
 }
 @keyframes yt{
-    60%{
+    80%{
         color: 	#FF0000;
         background-color: transparent;
         transform: scale(1);
     }
-    70%{
+    90%{
         background-color: #FF0000;
         transform: scale(1.1);
         color: white;
     }
-    80%{
+    100%{
         color: #FF0000;
         background-color: transparent;
         transform: scale(1);
@@ -368,43 +400,11 @@
     color: white;
     transform: translateY(-10px) scale(1.1);
 }
-.contact_cont .social-icons .link{
-    color: #E1306C;
-    animation-name: link;
-    animation-direction: normal;
-    animation-duration: 10s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-play-state: running;
-    animation-timing-function: linear;
-}
-@keyframes link{
-    80%{
-        transform: scale(1);
-        color: #E1306C;
-        background-color: transparent;
-    }
-    90%{
-        transform: scale(1.1);
-        background-color: #E1306C;
-        color: white;
-    }
-    100%{
-        color: #E1306C;
-        background-color: transparent;
-        transform: scale(1);
-    }
-}
-.contact_cont .social-icons .link:hover {
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    color: white;
-    transform: translateY(-10px) scale(1.1);
-}
-.contact_cont .socialcontainer:hover .social-icons .mob,
-.contact_cont .socialcontainer:hover .social-icons .loc,
+.contact_cont .socialcontainer:hover .social-icons .what,
+.contact_cont .socialcontainer:hover .social-icons .fb,
 .contact_cont .socialcontainer:hover .social-icons .mail,
 .contact_cont .socialcontainer:hover .social-icons .yt,
-.contact_cont .socialcontainer:hover .social-icons .link{
+.contact_cont .socialcontainer:hover .social-icons .insta{
     animation-name: none;
 }
 
@@ -434,8 +434,12 @@
 }
 @media only screen and (max-width:550px){
 
+    .contact_cont > .heading{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
     .cont-head .big{
-        font-size: 24px;
+        font-size: 20px;
     }
     .cont-head .small{
         font-size: 16px;

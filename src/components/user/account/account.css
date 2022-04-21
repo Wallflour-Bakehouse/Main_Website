@@ -90,3 +90,48 @@
 .account_cont .form_error.active{
     display: block;
 }
+
+@media only screen and (max-width: 750px) {
+    
+    .account_cont > .heading{
+        font-size: 24px;
+    }
+    .account_cont > .heading::after{
+        height: 2px;
+    }
+    .account_cont .dp_cont .dp{
+        height: 125px;
+        width: 125px;
+    }
+    .account_cont .dp_cont .edit{
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    
+    .account_cont > .heading{
+        font-size: 20px;
+    }
+    .account_cont > .heading::after{
+        height: 1px;
+    }
+    .account_cont .dp_cont{
+        margin-block: 20px;
+    }
+    .account_cont .dp_cont .dp{
+        height: 100px;
+        width: 100px;
+    }
+    .account_cont .dp_cont .edit{
+        height: 25px;
+        width: 25px;
+    }
+    .modal .modal-body .dp_opt_card{
+        height: 70px;
+        width: 70px;
+    }
+}
+
+

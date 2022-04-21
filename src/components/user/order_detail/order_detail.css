@@ -10,9 +10,6 @@
     font-size: 20px;   
     color: var(--lineColour);
 }
-.order_detail .row3{
-    margin-top: 50px;
-}
 .order_detail .row3 .heading{
     font-size: 18px;
     font-weight: 500;
@@ -21,7 +18,6 @@
 }
 .order_detail .row3 .add{
     border: 2px solid var(--lineColour);
-    padding: 30px;
     border-radius: 5px;
     color: black;
     transition: 0.5s ease-in-out;
@@ -44,4 +40,30 @@
     background-color: transparent;
     min-width: 150px;
     max-width: 250px;
+}
+
+@media only screen and (max-width: 750px) {
+    
+    .order_detail .ord_status{
+        font-size: 16px;
+    }
+    .order_detail .ord_status b{
+        font-size: 18px;   
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+    .order_detail .head{
+        margin-bottom: 20px;
+    }
+    .order_detail .status{
+        flex-direction: column;
+    }
+    .order_detail .ord_status{
+        font-size: 14px;
+    }
+    .order_detail .ord_status b{
+        font-size: 16px;   
+    }
 }

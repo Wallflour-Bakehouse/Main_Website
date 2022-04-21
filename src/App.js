@@ -26,6 +26,8 @@ import Error from './components/error/error';
 
 function App() {
   const [modal, setModal] = useState({open: false, header: "", body: ""})
+  const [chatScreen, setChatScreen] = useState(false)
+  const [loginOrSignupText, setLoginOrSignupText] = useState()
   function closeModal(){
     setModal({open: !modal.open})
   }
@@ -38,31 +40,31 @@ function App() {
   }
   return (
     <BrowserRouter>
-        <Nav/> 
+        <Nav chatScreen={chatScreen} loginOrSignupText={loginOrSignupText} /> 
         <DialogBox modal={modal} closeModal={closeModal} />
         <Switch>
-            <Route exact path="/home" component={()=><Home />} />
+            <Route exact path="/" component={()=><Home />} />
             <Route exact path="/menu"  component={()=><Menu />} />
             <Route exact path="/menu/:prodName"  component={()=><ProductDetail />} />
             <Route exact path="/contact" component={()=><Contact />} />
             <Route exact path="/cart"  component={()=><Cart triggerModal={triggerModal} />} />
             <Route exact path="/checkout"  component={()=><Checkout />} />
-            <Route exact path="/login"  component={()=><Login />} />
-            <Route exact path="/signup"  component={()=><SignUp />} />
-            <Route exact path="/signup/preference"  component={()=><Preference />} />
+            <Route exact path="/login"  component={()=><Login setLoginOrSignupText={setLoginOrSignupText} />} />
+            <Route exact path="/signup"  component={()=><SignUp setLoginOrSignupText={setLoginOrSignupText} />} />
+            <Route exact path="/signup/preference"  component={()=><Preference setLoginOrSignupText={setLoginOrSignupText} />} />
             <Route exact path="/user/dashboard"  component={()=><UserAccountNav />} />
             <Route exact path="/user/account"  component={()=><Account triggerModal={triggerModal} />} />
             <Route exact path="/user/address"  component={()=><UserAddress />} />
             <Route exact path="/user/comments"  component={()=><UserComments />} />
             {/* <Route exact path="/user/coupons"  component={()=><Coupons />} /> */}
-            <Route exact path="/user/chat"  component={()=><UserChat />} />
+            <Route exact path="/user/chat"  component={()=><UserChat setChatScreen={setChatScreen} />} />
             <Route exact path="/user/orders"  component={()=><UserOrders />} />
             <Route exact path="/user/orders/:orderId"  component={()=><UserOrderDetail triggerModal={triggerModal} />} />
             <Route exact path="/user/favourites"  component={()=><Favourite />} />
             <Route exact path="/error" component={()=><Error />} />
             <Redirect to="/error" />
         </Switch>
-        <Footer/>
+        <Footer chatScreen={chatScreen} />
     </BrowserRouter>
   );
 }
