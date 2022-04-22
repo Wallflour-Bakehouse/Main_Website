@@ -106,7 +106,7 @@ export default function Favourite() {
                     </ol>
                 </nav>
                 <div className="heading">Favourite Food</div>
-                <div className="row mb-5">
+                <div className="row mb-5">{console.log(favourites)}
                     { favourites.length>0 ? (
                         <Card categoryProducts={favourites} favourites={favourites} />
                     ):(

@@ -381,7 +381,9 @@ export default function ProductDetail() {
                             </div>):(<div className="btn_cont">Product has Been Removed</div>)}
                         </div>
                     </div>
-                    <CommentsSection productName={product.productName} comments={product.comments} />
+                    {!product.deleted ? (
+                        <CommentsSection productName={product.productName} comments={product.comments} />
+                    ):(<></>)}
                 </div>
             </div>
         )

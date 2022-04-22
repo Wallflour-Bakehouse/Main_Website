@@ -57,13 +57,15 @@ export default function Menu() {
             <div className="menu_cont container">
                 <div className="heading mb-3">Menu</div>
                 {products.map((prod)=>(
-                    prod.categoryProducts.length > 0 ? (
-                        <div className="row section mb-5" key={prod._id}>
-                            <div className="col-12">
-                                <div className="heading">{prod.categoryName}</div>
+                    !prod.deleted ? (
+                        prod.categoryProducts.length > 0 ? (
+                            <div className="row section mb-5" key={prod._id}>
+                                <div className="col-12">
+                                    <div className="heading">{prod.categoryName}</div>
+                                </div>
+                                <Card categoryProducts={prod.categoryProducts} favourites={favourites} />    
                             </div>
-                            <Card categoryProducts={prod.categoryProducts} favourites={favourites} />    
-                        </div>
+                        ):(<></>)
                     ):(<></>)
                 ))}
             </div>
