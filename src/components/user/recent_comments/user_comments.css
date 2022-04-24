@@ -63,12 +63,17 @@
     border-bottom: 2px solid var(--lineColour);
 }
 .user_comment_cont .no_comments{
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     margin-block: 10px;
     padding-block: 20px;
+    padding-inline: 5px;
     border: 2px dashed var(--lineColour);
     border-radius: 5px;
+}
+.user_comment_cont .no_comments div{
+    font-size: 20px;
+    font-weight: 500;
 }
 
 @media only screen and (max-width: 650px) {
@@ -82,6 +87,15 @@
     .user_comment_cont .section .heading{
         font-size: 16px;
     }
+    .user_comment_cont .no_comments{
+        font-size: 18px;
+    }
+    .user_comment_cont .no_comments{
+        font-size: 16px;
+    }
+    .user_comment_cont .no_comments div{
+        font-size: 18px;
+    }
 }
 @media only screen and (max-width: 450px) {
     
@@ -93,5 +107,11 @@
     }
     .user_comment_cont .section .heading{
         font-size: 14px;
+    }
+    .user_comment_cont .no_comments{
+        font-size: 14px;
+    }
+    .user_comment_cont .no_comments div{
+        font-size: 16px;
     }
 }

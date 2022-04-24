@@ -309,11 +309,11 @@
     .prod_det .add_comment_sec .row1{
         margin-bottom: 10px;
     }
+    .prod_det .no_comments{
+        font-size: 18px;
+    }
 }
 @media only screen and (max-width: 450px) {
-    .prod_det .img_cont{
-        height: 20vh;
-    }
     .prod_det .content  .preorder{
         display: block;
     }
@@ -331,6 +331,9 @@
     }
     .prod_det .content .cart_msg.error{
         transform: translate(50%, 0);
+    }
+    .prod_det .no_comments{
+        font-size: 16px;
     }
     .prod_det .add_comment_sec .img{
         height: 40px;

@@ -20,6 +20,7 @@
     animation: 2.5s line ease-in-out infinite alternate;
 }
 .fav_cont .no_favourites{
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,24 +30,26 @@
     font-size: 18px;
 }
 .fav_cont .no_favourites .like{
-    margin-inline: 10px;
+    transform: scale(1.1);
     color: white;
-    background-color: var(--btnColour);
+    background-color: rgba(213, 213, 213, 0.69);
     height: 30px;
     width: 30px;
     display: grid;
     place-items: center;
     cursor: pointer;
     border-radius: 100%;
+    margin-inline: 10px;
     transition: 0.5s ease-in-out;
 }
 .fav_cont .no_favourites .like:hover{
-    filter: brightness(1.1);
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 .fav_cont .no_favourites .like.active{
-    background-color: var(--lineColour);
-    transform: scale(1.);
+    background-color: rgb(255, 255, 255);
+    color: rgb(255, 0, 0);
+    animation: bounce 0.3s;
+    transform: scale(1.2);
 }
 
 @media only screen and (max-width: 750px) {
@@ -66,5 +69,9 @@
     }
     .fav_cont > .heading::after{
         height: 1px;
+    }
+    .fav_cont .no_favourites{
+        font-size: 14px;
+        padding-block: 20px;
     }
 }

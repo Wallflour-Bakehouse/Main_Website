@@ -105,17 +105,19 @@ export default function Favourite() {
                         <li className="breadcrumb-item active" aria-current="page">Favourite Food</li>
                     </ol>
                 </nav>
-                <div className="heading">Favourite Food</div>
-                <div className="row mb-5">{console.log(favourites)}
+                <div className="heading mb-1">Favourite Food</div>
+                <div className="row mb-5">
                     { favourites.length>0 ? (
                         <Card categoryProducts={favourites} favourites={favourites} />
                     ):(
-                        <div className='no_favourites'>
-                            <span>Add Dishes to favourites by clicking this button! </span>
-                            <div className="like" id="fav" onClick={highlightFav}>
-                                <FontAwesomeIcon icon={faHeart} />
+                        <div className='no_favourites flex-column flex-md-row'>
+                            <div>Add Dishes to favourites by clicking this button! </div>
+                            <div className='d-flex align-items-center mt-2 mt-md-0'>
+                                <div className="like" id="fav" onClick={highlightFav}>
+                                    <FontAwesomeIcon icon={faHeart} />
+                                </div>
+                                <div className="text">{favHelpText}</div>
                             </div>
-                            <div className="text">{favHelpText}</div>
                         </div>
                     )}
                 </div>

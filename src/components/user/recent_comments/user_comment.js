@@ -117,8 +117,8 @@ export default function UserComment() {
                         )}
                     </div>
                 ):( 
-                    <div className="no_comments mt-5">
-                        <h4>You Have Made No Comments</h4>
+                    <div className="no_comments mt-3">
+                        <div>You Have Made No Comments</div>
                         Feel Free To Share Your Opinion So That We Can Serve You Better
                     </div> 
                 )}

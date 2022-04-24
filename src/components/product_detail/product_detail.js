@@ -25,7 +25,13 @@ function CommentsSection({productName, comments}){
             if(token){
                 let username = JSON.parse(localStorage.getItem("profile")).result.username
                 setUser(username)
-                setDp(JSON.parse(localStorage.getItem('profile')).result.dp)
+                axios
+                .get(url+'/user/userDP',{
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                .then((res)=>{
+                    setDp(res.data)
+                })
                 let userComments = comments.filter(comment=>{
                     return comment.user===username
                 })
@@ -57,7 +63,6 @@ function CommentsSection({productName, comments}){
         if(token){
             if(comment._id!=''){
                 try{
-                    const token = JSON.parse(localStorage.getItem("profile")).token
                     axios
                     .put(url+'/comment/'+comment._id,{
                         'productName': productName,

@@ -62,8 +62,8 @@ export default function Home() {
                 <Carousel/>
                 <div className="section section2 container-fluid">
                     <div className="row flex-md-row-reverse">
-                        <div className="image col-12 col-md-6"></div>    
-                        <div className="content col-12 col-md-6">
+                        <div className="image col-12 col-lg-6"></div>    
+                        <div className="content col-12 col-lg-6">
                             <div className="heading">About Us</div>
                             <div className="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat eius velit voluptatum reprehenderit error voluptate vero sequi quaerat sint, optio vel modi architecto veritatis ipsa sit quo. Dolorem, ratione esse!
                             Mollitia consequuntur atque vel facere aliquam, et, debitis impedit ipsa nulla tempora laboriosam? Nulla dolorum eveniet omnis odit suscipit maiores, quo repellendus molestiae in, assumenda ut consequuntur! Unde, impedit aspernatur.</div>

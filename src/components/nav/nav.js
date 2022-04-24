@@ -1,25 +1,25 @@
 import React, {useEffect, useState} from 'react'
-import './nav.css'
+import axios from 'axios'
+import {url} from '../../url'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faUser, faListUl, faAt, faHouseChimney, faMessage, faCartShopping } from '@fortawesome/free-solid-svg-icons'
-
 import { Link } from 'react-router-dom'
+import './nav.css'
 
-
-function Loginopt({user}){
+function Loginopt({user, token}){
 
     function logout(){
         localStorage.clear()
         window.location.replace("/")
     }
 
-    if(user){
+    if(token!==""){
         return(
             <div className="opt">
                 <Link to="/cart" className='cart_btn'><FontAwesomeIcon icon={faCartShopping} /></Link>
                 <div className='user_sec'>
                     <Link to="/user/dashboard" className='user_symbol'>
-                        <div className="dp_img" style={{backgroundImage: 'url('+user.result.dp+')'}}></div>
+                        <div className="dp_img" style={{backgroundImage: 'url('+user+')'}}></div>
                     </Link>
                     <div className="dropdown">
                         <Link to="/user/dashboard" className="option">Your Account</Link>
@@ -42,11 +42,20 @@ function Loginopt({user}){
 
 export default function Nav(props) {
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))) 
+    const [user, setUser] = useState() 
+    const [token, setToken] = useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")).token : "")
 
     useEffect(() => {
-        if(localStorage.getItem('profile')){
-            setUser(JSON.parse(localStorage.getItem('profile')))
+        try{
+            axios
+            .get(url+'/user/userDP',{
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            .then((res)=>{
+                setUser(res.data)
+            })
+        }catch(error){
+            console.log(error)
         }
     }, [])
 
@@ -70,14 +79,14 @@ export default function Nav(props) {
                 <div className="navitems">
                     <Link to="/"><div className="navele">Home <FontAwesomeIcon icon={faHouseChimney} /></div></Link>
                     <Link to="/menu"><div className="navele">Menu <FontAwesomeIcon icon={faListUl} /></div></Link>
-                    {user ? (
+                    {token!=="" ? (
                         <Link to="/user/chat" target="_blank"><div className="navele">Chat <FontAwesomeIcon icon={faMessage} /></div></Link>
                     ):(
                         <Link to="/contact"><div className="navele">Contact Us <FontAwesomeIcon icon={faAt} /></div></Link>
                     )}
                 </div>
                 <div className="nav_sec">
-                    <Loginopt user={user} />
+                    <Loginopt user={user} token={token} />
                 </div>
             </div>
             <div className="mob_nav">
@@ -106,11 +115,11 @@ export default function Nav(props) {
                             <span className="text">Menu</span>
                         </Link>
                     </li>
-                    <li className={'mob_list'+(user ? " dp":" ") } id="mob_4" onClick={()=>activeMobLink("mob_4")}>
-                        {user ? (
+                    <li className={'mob_list'+(token ? " dp":" ") } id="mob_4" onClick={()=>activeMobLink("mob_4")}>
+                        {token!=="" ? (
                             <Link to="/user/dashboard">
                                 <span className="icon">
-                                    <div className="dp_img" style={{backgroundImage: 'url('+user.result.dp+')'}}></div>
+                                    <div className="dp_img" style={{backgroundImage: 'url('+user+')'}}></div>
                                 </span>
                                 <span className="text">Account</span>
                             </Link>
@@ -124,7 +133,7 @@ export default function Nav(props) {
                         )}
                     </li>
                     <li className='mob_list' id="mob_5">
-                        {user ? (
+                        {token ? (
                             <Link to="/user/chat" target="_blank">
                                 <span className="icon">
                                     <FontAwesomeIcon icon={faMessage} />
