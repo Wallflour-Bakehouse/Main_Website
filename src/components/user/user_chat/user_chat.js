@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Error from '../../error/error';
 import axios from 'axios'
+import moment from 'moment'
 import {url} from '../../../url'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,9 +12,10 @@ import './user_chat.css'
 export default function UserChat(props) {
 
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("profile")) ? JSON.parse(localStorage.getItem("profile")).token : "")
-  const [conversation, setConversation] = useState()
+  const [conversations, setConversations] = useState()
   const [message, setMessage] = useState('')
   const [pageError, setPageError] = useState()
+  const daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
   useEffect(() => {
     document.title = `WallFlour Bakehouse | Chat`
@@ -27,7 +29,7 @@ export default function UserChat(props) {
         headers: {'authorization': `Bearer ${token}`}
       })
       .then((res)=>{
-        setConversation(res.data)
+        setConversations(res.data.conversation)
       })
       .catch(()=>{
         setPageError(true)
@@ -50,10 +52,6 @@ export default function UserChat(props) {
   }
   
   function handleSubmit() {
-    document.querySelector('.send_btn').classList.add('active')
-    setTimeout(() => {
-      document.querySelector('.send_btn').classList.remove('active')
-    }, 501);
     try{
       let valid = validateForm()
       if(!valid) return
@@ -66,7 +64,7 @@ export default function UserChat(props) {
       .then((res)=>{
         document.querySelector('.error_message').classList.remove('active')
         setMessage('')
-        setConversation(res.data)
+        setConversations(res.data.conversation)
       })
       .catch(()=>{
         document.querySelector('.error_message').classList.add('active')
@@ -101,29 +99,19 @@ export default function UserChat(props) {
           </div>
         </div>
         <div className="chat_section" id="chat_section">
-          {conversation ?
-            (
-              <>
-                <>
-                  {conversation.messages.map((message)=>
-                    <div className={"message"+(message.username!=="admin" ? " active" : "")}>
+          {conversations ?
+            ( 
+              conversations.map((conversation)=>
+                <span className='conversation_sec' key={conversation._id}>
+                  <div className="date">{moment(conversation.conversationDate).format("DD/MM/YYYY")} {daysOfTheWeek[moment(conversation.conversationDate).day()]}</div>
+                  {conversation.messages.map(message=>
+                    <div className={"message"+(message.role!=="admin" ? " active" : "")} key={message._id}>
                       {message.message}
-                    </div>)}
-                  
-                </>
-                <div className="message">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro vel ullam dicta doloribus perspiciatis molestiae cum a, illo quisquam! Libero exercitationem quas accusamus fuga. Fuga modi hic laudantium natus quasi!
-                </div>
-                <div className="message">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro vel ullam dicta doloribus perspiciatis molestiae cum a, illo quisquam! Libero exercitationem quas accusamus fuga. Fuga modi hic laudantium natus quasi!
-                </div>
-                <div className="message">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro vel ullam dicta doloribus perspiciatis molestiae cum a, illo quisquam! Libero exercitationem quas accusamus fuga. Fuga modi hic laudantium natus quasi!
-                </div>
-                <div className="message">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro vel ullam dicta doloribus perspiciatis molestiae cum a, illo quisquam! Libero exercitationem quas accusamus fuga. Fuga modi hic laudantium natus quasi!
-                </div>
-              </>
+                      <div className="time">{moment(message.time).format("hh:mm A")}</div>
+                    </div>
+                  )}
+                </span>
+              )
             ):(<></>)
           }
         </div>

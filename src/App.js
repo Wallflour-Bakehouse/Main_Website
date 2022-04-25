@@ -28,9 +28,11 @@ function App() {
   const [modal, setModal] = useState({open: false, header: "", body: ""})
   const [chatScreen, setChatScreen] = useState(false)
   const [loginOrSignupText, setLoginOrSignupText] = useState()
+
   function closeModal(){
     setModal({open: !modal.open})
   }
+  
   function triggerModal(header, body){
     setModal({
       open: !modal.open,

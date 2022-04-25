@@ -21,7 +21,6 @@ function Form(){
     const [formData, setFormData] = useState(initialState)
     const [token, setToken] = useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")).token : "")
     const [errors, setErrors]= useState(initialState)
-    const [confirmation, setConfirmation] = useState()
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
     useEffect(() => {
@@ -180,7 +179,7 @@ function Form(){
                         <div id="error_message" className='form_error'>{errors.message}</div>
                     </div>
                     <div className="submit" onClick={()=>handleSubmit(true)}>Send Message</div>
-                    <div id="error_submit">{errors.submit}</div>
+                    <div className="confirmation" id="error_submit">{errors.submit}</div>
                 </form>
             )
         }

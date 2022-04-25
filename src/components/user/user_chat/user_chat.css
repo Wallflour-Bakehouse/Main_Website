@@ -66,7 +66,19 @@
     display: flex;
     flex-direction: column;
 }
-
+.chat_cont .chat_section .conversation_sec{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.chat_cont .chat_section .conversation_sec .date{
+    align-self: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--body);
+    margin-bottom: 5px;
+    font-size: 14px;
+}
 .chat_cont .chat_section::-webkit-scrollbar,
 .chat_cont .chat_footer textarea::-webkit-scrollbar{
     width: 0.4vw;
@@ -79,8 +91,10 @@
 }
 .chat_cont .chat_section .message{
     position: relative;
-    padding: 10px 20px;
+    padding: 10px 10px;
+    padding-bottom: 18px;
     background-color: rgb(245, 245, 245);
+    min-width: 80px;
     max-width: 65%;
     width: fit-content;
     border-radius: 10px;
@@ -88,6 +102,12 @@
     margin-top: 10px;
     align-self: flex-start;
     font-size: 14px;
+}
+.chat_cont .chat_section .message .time{
+    position: absolute;
+    bottom: 2px;
+    right: 5px;
+    font-size: 10px;
 }
 .chat_cont .chat_section .message::after{
     content: '';
@@ -194,6 +214,7 @@
     .chat_cont .chat_section .message{
         max-width: 75%;
         padding: 10px;
+        padding-bottom: 15px;
     }
     .chat_cont .chat_header{
         font-size: 18px;
@@ -207,7 +228,11 @@
     .chat_cont .chat_section .message{
         max-width: 90%;
         padding: 5px 10px;
-        font-size: 12px;
+        padding-bottom: 15px;
+        font-size: 15px;
+    }
+    .chat_cont .chat_section .message .time{
+        font-size: 10px;
     }
     .chat_cont .chat_header{
         font-size: 16px;
