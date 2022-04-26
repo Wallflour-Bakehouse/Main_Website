@@ -18,28 +18,19 @@ function CommentsSection({productName, comments}){
     const [dp, setDp] = useState()
     const [userComments, setUserComments] = useState()
     const [otherComments, setOtherComments] = useState()
-    const [token, setToken] = useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")).token : "")
+    const token = localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")).token : ""
 
     useEffect(()=>{
         try{
             if(token){
-                let username = JSON.parse(localStorage.getItem("profile")).result.username
-                setUser(username)
                 axios
                 .get(url+'/user/userDP',{
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 .then((res)=>{
-                    setDp(res.data)
+                    setDp(res.data.dp)
+                    setUser(res.data.username)
                 })
-                let userComments = comments.filter(comment=>{
-                    return comment.user===username
-                })
-                let otherComments = comments.filter(comment=>{
-                    return comment.user!==username
-                })
-                setUserComments(userComments)
-                setOtherComments(otherComments)
             }
             else{
                 setUserComments(true)
@@ -50,6 +41,17 @@ function CommentsSection({productName, comments}){
             console.log(error)
         }
     },[])
+
+    useEffect(()=>{
+        let userComments = comments.filter(comment=>{
+            return comment.user===user
+        })
+        let otherComments = comments.filter(comment=>{
+            return comment.user!==user
+        })
+        setUserComments(userComments)
+        setOtherComments(otherComments)
+    },[user])
 
     function changeComment(e){
         setComment({...comment, [e.target.name]: e.target.value})

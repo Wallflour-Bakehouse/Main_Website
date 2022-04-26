@@ -1,13 +1,26 @@
 .user_dashboard{
     padding-top: 100px;
 }
-.user_dashboard > .heading{
+.user_dashboard .heading_sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user_dashboard .heading_sec .heading{
     font-size: 28px;
     position: relative;
     width: fit-content;
     overflow: hidden;
 }
-.user_dashboard > .heading::after{
+.user_dashboard .heading_sec .logout_btn{
+    font-size: 16px;
+    padding: 5px 10px;
+    background-color: var(--btnColour);
+    color: white;
+    border-radius: 5px;
+    display: none;
+}
+.user_dashboard .heading_sec .heading::after{
     content: '';
     position: absolute;
     bottom: 0;
@@ -51,10 +64,16 @@
     margin-right: 20px;
 }
 
+@media only screen and (max-width: 1000px) {
+
+    .user_dashboard .heading_sec .logout_btn{
+        display: block;
+    }
+}
+
 @media only screen and (max-width: 750px) {
 
-    
-    .user_dashboard > .heading{
+    .user_dashboard .heading_sec .heading{
         font-size: 24px;
     }
     .user_dashboard .subheading{
@@ -80,8 +99,12 @@
 
 @media only screen and (max-width: 550px) {
     
-    .user_dashboard > .heading{
+    .user_dashboard .heading_sec .heading{
         font-size: 22px;
+    }
+    .user_dashboard .heading_sec .logout_btn{
+        font-size: 14px;
+        padding: 3px 10px;
     }
     .user_dashboard .subheading{
         margin-block: 15px;

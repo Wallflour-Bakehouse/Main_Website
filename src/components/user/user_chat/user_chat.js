@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Error from '../../error/error';
 import axios from 'axios'
 import moment from 'moment'
 import {url} from '../../../url'
-import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
@@ -11,18 +10,25 @@ import './user_chat.css'
 
 export default function UserChat(props) {
 
-  const [token, setToken] = useState(JSON.parse(localStorage.getItem("profile")) ? JSON.parse(localStorage.getItem("profile")).token : "")
+  const token = JSON.parse(localStorage.getItem("profile")) ? JSON.parse(localStorage.getItem("profile")).token : ""
   const [conversations, setConversations] = useState()
   const [message, setMessage] = useState('')
   const [pageError, setPageError] = useState()
   const daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
+  const AlwaysScrollToBottom = () => {
+    const elementRef = useRef();
+    useEffect(() => {
+      elementRef.current.scrollIntoView()
+      document.getElementById("message_section").focus() 
+    });
+    return <div ref={elementRef} />;
+  };
+
   useEffect(() => {
     document.title = `WallFlour Bakehouse | Chat`
     props.setChatScreen(true)
     window.scrollTo(0, 0)
-    var objDiv = document.getElementById("chat_section");
-    objDiv.scrollTop = objDiv.scrollHeight;
     try{
       axios
       .get(url+'/message/getUserMessage',{
@@ -98,20 +104,23 @@ export default function UserChat(props) {
             </a>
           </div>
         </div>
-        <div className="chat_section" id="chat_section">
+        <div className="chat_section" id="message_section" tabIndex="0">
           {conversations ?
             ( 
-              conversations.map((conversation)=>
-                <span className='conversation_sec' key={conversation._id}>
-                  <div className="date">{moment(conversation.conversationDate).format("DD/MM/YYYY")} {daysOfTheWeek[moment(conversation.conversationDate).day()]}</div>
-                  {conversation.messages.map(message=>
-                    <div className={"message"+(message.role!=="admin" ? " active" : "")} key={message._id}>
-                      {message.message}
-                      <div className="time">{moment(message.time).format("hh:mm A")}</div>
-                    </div>
-                  )}
-                </span>
-              )
+              <>
+                {conversations.map((conversation)=>
+                  <div className='conversation_sec' key={conversation._id}>
+                    <div className="date">{moment(conversation.conversationDate).format("DD/MM/YYYY")} {daysOfTheWeek[moment(conversation.conversationDate).day()]}</div>
+                    {conversation.messages.map(message=>
+                      <div className={"message"+(message.role!=="admin" ? " active" : "")} key={message._id}>
+                        {message.message}
+                        <div className="time">{moment(message.time).format("hh:mm A")}</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+                <AlwaysScrollToBottom />
+              </>
             ):(<></>)
           }
         </div>

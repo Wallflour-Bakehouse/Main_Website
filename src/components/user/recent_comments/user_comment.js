@@ -19,6 +19,7 @@ export default function UserComment() {
         'comment': '',
         'createdAt': ''
     })
+    const [dp, setDp] = useState()
     const [pageError, setPageError] = useState()
 
     useEffect(() => {
@@ -30,14 +31,15 @@ export default function UserComment() {
         })
         document.getElementById('mob_4').classList.add('active')
         try{
-            setComment({...comment, user: JSON.parse(localStorage.getItem("profile")).result.username})
             const token = JSON.parse(localStorage.getItem("profile")).token
             axios
             .get(url+'/comment/',{
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then((res)=>{
-                setComments(res.data)
+                setComments(res.data.comments)
+                setComment({...comment, user: res.data.username})
+                setDp(res.data.dp)
             })
             .catch(()=>{
                 setPageError(true)
@@ -71,7 +73,9 @@ export default function UserComment() {
     }
     
     if(pageError){
-        return(<Error login={true} />)
+        return(
+            <Error login={true} />
+        )
     }
     else if(comments){
         return (
@@ -86,21 +90,23 @@ export default function UserComment() {
                 { comment.productName  ? (
                     <div className="row mt-4">
                         <div className="col-12">
-                            <h5>Editing Comment on {comment.productName} on {moment(comment.createdAt).format("DD/MM/YYYY")} at {moment(comment.createdAt).format("HH:MM")}</h5>
+                            <div className='edit_heading mb-3'>Editing Comment on {comment.productName} on {moment(comment.createdAt).format("DD/MM/YYYY")} at {moment(comment.createdAt).format("hh:mm A")}</div>
                             <div className="add_comment_sec">
-                                <img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png" alt="" />
-                                <div className='form'>
-                                    <div className='mb-2'>
-                                        <label htmlFor="">Rating</label>
-                                        <select name="rating" onChange={handleChange}>
-                                            <option value={5}>5</option>
-                                            <option value={4}>4</option>
-                                            <option value={3}>3</option>
-                                            <option value={2}>2</option>
-                                            <option value={1}>1</option>
-                                        </select>
+                                <div className="row1">
+                                    <div className="img" style={{backgroundImage: 'url('+dp+')'}}></div>
+                                    <div className='form'>
+                                        <div className='mb-2'>
+                                            <label htmlFor="">Rating</label>
+                                            <select name="rating" onChange={handleChange}>
+                                                <option value={5}>5</option>
+                                                <option value={4}>4</option>
+                                                <option value={3}>3</option>
+                                                <option value={2}>2</option>
+                                                <option value={1}>1</option>
+                                            </select>
+                                        </div>
+                                        <textarea type="text" placeholder='Edit Your Comment...' name="comment" onChange={handleChange} value={comment.comment}/>
                                     </div>
-                                    <textarea type="text" placeholder='Add a comment...' name="comment" onChange={handleChange} value={comment.comment}/>
                                 </div>
                                 <div className="btn_cont" onClick={updateComment}><div className="btn_">Comment</div></div>
                             </div>

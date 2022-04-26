@@ -65,6 +65,7 @@
     border-bottom: none;
     display: flex;
     flex-direction: column;
+    outline: none;
 }
 .chat_cont .chat_section .conversation_sec{
     padding-top: 10px;
@@ -168,6 +169,8 @@
     margin-left: 20px;
     height: 45px;
     width: 45px;
+    min-height: 45px;
+    min-width: 45px;
     display: grid;
     place-items: center;
     border-radius: 100%;
@@ -243,5 +246,28 @@
     }
     .chat_cont .chat_header .right{
         font-size: 18px;
+    }
+    .chat_cont .chat_footer{
+        padding: 10px;
+    }
+    .chat_cont .chat_footer .send_btn{
+        margin-left: 10px;
+        height: 40px;
+        width: 40px;
+        min-height: 40px;
+        min-width: 40px
+    }
+}
+
+@media only screen and (max-height: 450px) {
+    .chat_cont .chat_footer{
+        padding: 5px;
+    }
+    .chat_cont .chat_footer .send_btn{
+        margin-left: 8px;
+        height: 35px;
+        width: 35px;
+        min-height: 35px;
+        min-width: 35px
     }
 }

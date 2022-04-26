@@ -154,6 +154,18 @@ body{
     color: white;
     position: relative;
 }
+.navitems .navele .chat_img{
+    position: relative;
+}
+.navitems .navele .unread_message_alert{
+    position: absolute;
+    top: 0;
+    right: -5px;
+    height: 9px;
+    width: 9px;
+    border-radius: 100%;
+    background-color: var(--error);
+}
 .navitems .navele::after{
     content: '';
     position: absolute;
@@ -343,7 +355,15 @@ body{
     justify-content: center;
     align-items: center;
     z-index: 5;
-
+}
+.mob_nav .mob_list .icon .unread_message_alert{
+    position: absolute;
+    top: 25%;
+    right: -5px;
+    height: 9px;
+    width: 9px;
+    border-radius: 100%;
+    background-color: var(--error);
 }
 .mob_nav ul{
     display: flex;

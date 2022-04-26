@@ -13,6 +13,7 @@ export default function Cart(props) {
 
     const [cart, setCart] = useState()
     const [pageError, setPageError] = useState()
+    const token = JSON.parse(localStorage.getItem("profile")).token
 
     useEffect(() => {
         document.title = `Wallflour Bakehouse | Cart`
@@ -23,7 +24,6 @@ export default function Cart(props) {
         })
         document.getElementById('mob_2').classList.add('active')
         try{
-            const token = JSON.parse(localStorage.getItem("profile")).token
             axios
             .get(url+'/cart/',{
                 headers: {'authorization': `Bearer ${token}`}
@@ -31,7 +31,7 @@ export default function Cart(props) {
             .then((res)=>{
                 setCart(res.data)
             })
-            .catch(()=>{
+            .catch((error)=>{
                 setPageError(true)
             })
         } 

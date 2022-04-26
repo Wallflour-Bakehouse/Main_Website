@@ -43,6 +43,7 @@ function Loginopt({user, token}){
 export default function Nav(props) {
 
     const [user, setUser] = useState() 
+    const [unreadMessage, setUnreadMessage] = useState() 
     const [token, setToken] = useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")).token : "")
 
     useEffect(() => {
@@ -52,12 +53,23 @@ export default function Nav(props) {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then((res)=>{
-                setUser(res.data)
+                setUser(res.data.dp)
+            })
+            axios
+            .get(url+'/message/checkUserMessage',{
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            .then((res)=>{
+                setUnreadMessage(res.data)
             })
         }catch(error){
             console.log(error)
         }
     }, [])
+
+    function messagesOpened(){
+        setUnreadMessage(false)
+    }
 
     function activeMobLink(id){
         let nodeList = document.querySelectorAll(".mob_list")
@@ -80,7 +92,15 @@ export default function Nav(props) {
                     <Link to="/"><div className="navele">Home <FontAwesomeIcon icon={faHouseChimney} /></div></Link>
                     <Link to="/menu"><div className="navele">Menu <FontAwesomeIcon icon={faListUl} /></div></Link>
                     {token!=="" ? (
-                        <Link to="/user/chat" target="_blank"><div className="navele">Chat <FontAwesomeIcon icon={faMessage} /></div></Link>
+                        <Link to="/user/chat" target="_blank">
+                            <div className="navele" onClick={messagesOpened}>
+                                <>Chat</>
+                                <div className="chat_img">
+                                    <FontAwesomeIcon icon={faMessage} />
+                                    {unreadMessage ? (<div className="unread_message_alert"></div>):(<></>)}
+                                </div>
+                            </div>
+                        </Link>
                     ):(
                         <Link to="/contact"><div className="navele">Contact Us <FontAwesomeIcon icon={faAt} /></div></Link>
                     )}
@@ -134,9 +154,10 @@ export default function Nav(props) {
                     </li>
                     <li className='mob_list' id="mob_5">
                         {token ? (
-                            <Link to="/user/chat" target="_blank">
+                            <Link to="/user/chat" target="_blank" onClick={messagesOpened}>
                                 <span className="icon">
                                     <FontAwesomeIcon icon={faMessage} />
+                                    {unreadMessage ? (<div className="unread_message_alert"></div>):(<></>)}
                                 </span>
                                 <span className="text">Chat</span>
                             </Link>

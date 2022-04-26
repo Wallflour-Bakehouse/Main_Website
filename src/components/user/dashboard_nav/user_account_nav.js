@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Error from '../../error/error';
+import axios from 'axios'
+import CircleLoader from '../../loader/circle_loader';
+import {url} from '../../../url'
 import { Link, Redirect } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapLocationDot, faUserLock, faMessage, faCommentDots, faHeart, faTicket, faTruckFast } from '@fortawesome/free-solid-svg-icons'
@@ -7,7 +10,7 @@ import './user_account_nav.css'
 
 export default function UserAccountNav() {
     
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))) 
+    const [user, setUser] = useState() 
     const [pageError, setPageError] = useState()
 
     useEffect(()=>{
@@ -18,7 +21,27 @@ export default function UserAccountNav() {
             ele.classList.remove('active')
         })
         document.getElementById('mob_4').classList.add('active')
+        try{
+            const token = JSON.parse(localStorage.getItem("profile")).token
+            axios
+            .get(url+'/user/userDP',{
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            .then((res)=>{
+                setUser(res.data.username)
+            })
+            .catch(()=>{
+                setPageError(true)
+            })
+        }catch(error){
+            setPageError(true)
+        }
     }, [])
+
+    function logout(){
+        localStorage.clear()
+        window.location.replace("/")
+    }
 
     if(pageError){
         return(<Error login={true} />)
@@ -26,7 +49,10 @@ export default function UserAccountNav() {
     else if(user){
         return (
             <div className="user_dashboard container">
-                <div className="heading">Howdy {user.result.username}!</div>
+                <div className="heading_sec">
+                    <div className="heading">Howdy {user}!</div>
+                    <div className="logout_btn" onClick={logout}>Logout</div>
+                </div>
                 <div className="subheading">User Dashboard</div>
                 <div className="row mb-5">
                     <div className="col-6 col-md-4 col-lg-4 d-flex justify-content-center">
@@ -76,8 +102,6 @@ export default function UserAccountNav() {
         )
     }
     else{
-        return(
-            <Redirect to="/"/>
-        )
+        return(<CircleLoader/>)
     }
 }

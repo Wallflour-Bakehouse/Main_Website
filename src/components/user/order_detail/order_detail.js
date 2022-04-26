@@ -5,7 +5,7 @@ import Loader from '../../loader/loader'
 import {url} from '../../../url'
 import { Link, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMessage, faCalendarDay } from '@fortawesome/free-solid-svg-icons'
+import { faMessage } from '@fortawesome/free-solid-svg-icons'
 import '../../cart/cart.css'
 import './order_detail.css'
 
@@ -80,14 +80,13 @@ export default function UserOrderDetail(props) {
                                 ):(<></>)}
                             </div>
                         </div>
-                        <div className="col-2 col-md-2 col-lg-2 price_cont">
-                            <div className="price">₹{item.product.price-(item.product.price*item.product.discount*0.01)}</div>
-                            {item.product.discount!==0 ? (
-                                <>  
+                        <div className="col-2 col-lg-2 price_cont">
+                                <div className="price">₹{item.product.price-(item.product.price*item.product.discount*0.01)}
+                                {item.product.discount!==0 ? (
                                     <div className="discount_price">₹{item.product.price}</div>
-                                </>
-                            ):(<></>)}
-                        </div>
+                                ):(<></>)}
+                                </div>
+                            </div>
                         <div className="col-3 col-md-2 col-lg-3 quantity">{item.quantity}</div>
                         <div className="col-3 col-md-2 col-lg-2 total">₹ {item.total}</div>
                     </div>

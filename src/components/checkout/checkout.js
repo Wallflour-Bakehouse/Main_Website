@@ -99,7 +99,7 @@ function AddressBox(props){
         else{
             return(
                 <div className="box no_add">
-                    <h5>No Shipping Address Added</h5>
+                    <h5>No Delivery Address Added</h5>
                 </div>
             )
         }
@@ -304,7 +304,7 @@ export default function Checkout() {
                             </div>
                             <div className="new_add">
                             {formVissible ? (<>
-                                <h5><b>{formData.id ? (<>Edit Shipping Address</>) : (<>Add a New Shipping Address</>) }</b></h5>
+                                <h5><b>{formData.id ? (<>Edit Delivery Address</>) : (<>Add a New Delivery Address</>) }</b></h5>
                                 <Form className='mt-4'>
                                     <FormGroup row>
                                         <Label htmlFor="name" lg={3}>Full Name</Label>
@@ -411,7 +411,7 @@ export default function Checkout() {
                                 ):(
                                     <></>
                                 )}
-                                <div className="warning">Select A Shipping Address</div>
+                                <div className="warning">Select A Delivery Address</div>
                             </div>
                         </div>
                     </div>
