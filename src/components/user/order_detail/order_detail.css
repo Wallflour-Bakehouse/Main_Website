@@ -1,3 +1,39 @@
+.order_detail .delete{
+    position: absolute;
+    top: 90px;
+    right: 2vw;
+    background-color: rgb(217, 2, 2);
+    height: 45px;
+    width: 45px;
+    font-size: 18px;
+    display: grid;
+    place-content: center;
+    border-radius: 100%;
+    color: white;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+.order_detail .delete::after{
+    content: 'Request For Order Cancellation';
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    bottom: -25px;
+    padding: 2px 10px;
+    font-size: 12px;
+    width: max-content;
+    background-color: rgb(204, 0, 0);
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: 0.5s ease-in-out;
+}
+.order_detail .delete:hover::after{
+    transform: translateY(0px);
+    opacity: 1;
+}
+.order_detail .delete:hover{
+    filter: brightness(1.1);
+}
 .order_detail .status{
     display: flex;
     justify-content: space-between;
@@ -54,6 +90,19 @@
 
 @media only screen and (max-width: 550px) {
 
+    .order_detail .delete{
+        position: absolute;
+        top: 80px;
+        right: 2vw;
+        background-color: rgb(217, 2, 2);
+        height: 35px;
+        width: 35px;
+        font-size: 16px;
+    }
+    .order_detail .delete::after{
+        padding: 2px 10px;
+        font-size: 10px;
+    }
     .order_detail .head{
         margin-bottom: 20px;
     }

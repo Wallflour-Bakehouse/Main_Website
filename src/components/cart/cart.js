@@ -12,6 +12,7 @@ import './cart.css'
 export default function Cart(props) {
 
     const [cart, setCart] = useState()
+    const [orderOpen, setOrderOpen] = useState()
     const [pageError, setPageError] = useState()
     const token = JSON.parse(localStorage.getItem("profile")).token
 
@@ -29,7 +30,8 @@ export default function Cart(props) {
                 headers: {'authorization': `Bearer ${token}`}
             })
             .then((res)=>{
-                setCart(res.data)
+                setCart(res.data.cart)
+                setOrderOpen(res.data.openOrder)
             })
             .catch((error)=>{
                 setPageError(true)
@@ -160,11 +162,15 @@ export default function Cart(props) {
                             <b>Total:</b>
                             <div className="total ms-3">₹ {cart.grandTotal}</div>
                         </div>
-                        { cart.cartItems.length>0 ? (
+                        { orderOpen ? (
                             <div className="btn_cont mt-5">
                                 <Link to="/checkout"><div className="btn_">Checkout</div></Link>
                             </div>
-                        ):(<></>)}
+                        ):(
+                            <div className="btn_cont mt-5">
+                                <div className="deny_orders">We Are Not Accepting Orders Today</div>
+                            </div>
+                        )}
                     </div>
                 </div>
             )

@@ -135,8 +135,8 @@ export default function Nav(props) {
                             <span className="text">Menu</span>
                         </Link>
                     </li>
-                    <li className={'mob_list'+(token ? " dp":" ") } id="mob_4" onClick={()=>activeMobLink("mob_4")}>
-                        {token!=="" ? (
+                    <li className={'mob_list'+(user ? " dp":" ") } id="mob_4" onClick={()=>activeMobLink("mob_4")}>
+                        {user ? (
                             <Link to="/user/dashboard">
                                 <span className="icon">
                                     <div className="dp_img" style={{backgroundImage: 'url('+user+')'}}></div>

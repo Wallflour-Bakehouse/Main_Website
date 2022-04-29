@@ -3,7 +3,7 @@ import Error from '../error/error';
 import axios from 'axios'
 import Loader from '../loader/loader';
 import {url} from '../../url'
-import { Form, FormGroup, Label, Input, Col, FormFeedback } from "reactstrap";
+import { Form, FormGroup, Label, Input, Col } from "reactstrap";
 import { Link, Redirect } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faPenToSquare, faPlus, faCircleCheck } from '@fortawesome/free-solid-svg-icons'
@@ -112,6 +112,7 @@ function AddressBox(props){
 export default function Checkout() {
 
     const [user, setUser] = useState(null)
+    const [orderOpen, setOrderOpen] = useState()
     const [formVissible, setFormVissible] = useState(false)
     const [selectedAddress, setSelectedAddress] = useState()
     const [cart, setCart] = useState()
@@ -162,7 +163,8 @@ export default function Checkout() {
                 headers: {'authorization': `Bearer ${token}`}
             })
             .then((res)=>{
-                setCart(res.data)
+                setCart(res.data.cart)
+                setOrderOpen(res.data.openOrder)
             })
             .catch(()=>{
                 setPageError(true)
@@ -237,8 +239,11 @@ export default function Checkout() {
             },{
                 headers: { "authorization": `Bearer ${token}` }
             })
-            .then((res)=>{
-                window.location.reload()
+            .then(()=>{
+                window.location.replace('/orderConfirmation')
+            })
+            .catch(()=>{
+                alert("Can Not Place Order. Please Try Again Later")
             })
         } catch(error){
             console.log(error)
@@ -404,13 +409,11 @@ export default function Checkout() {
                                         <span className="ms-3">₹ {cart.grandTotal}</span>
                                     </div>
                                 </div>
-                                {   cart.cartItems.length>0 ? (
+                                {cart.cartItems.length>0&&orderOpen ? (
                                     <div className="row pay_cont" onClick={placeOrder}>
                                         <div className="pay_btn">Proceed To Pay</div>
                                     </div>
-                                ):(
-                                    <></>
-                                )}
+                                ):(<></>)}
                                 <div className="warning">Select A Delivery Address</div>
                             </div>
                         </div>

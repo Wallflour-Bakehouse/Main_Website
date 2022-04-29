@@ -209,6 +209,13 @@
     font-size: 20px;
     border-bottom: 2px solid var(--lineColour);
 }
+.cart .deny_orders{
+    cursor: default;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: var(--btnColour);
+}
 .empty_cart{
     display: flex;
     flex-direction: column;

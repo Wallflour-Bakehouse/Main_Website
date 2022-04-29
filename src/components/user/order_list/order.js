@@ -9,27 +9,27 @@ import './order.css'
 
 function OrderCard(props){
 
-  return props.orders.map(order=>
-    <div className="col-12 col-md-6 col-lg-4" key={order._id}>
-      <div className="order_card">
-        <div className="row_ order_number"><b>Order Number:</b> {order._id}</div>
-        <div className="row_ total"><b>Total:</b> ₹{order.grandTotal}</div>
-        <div className="row_ dishes">
-          <b>Dishes:</b>
-          {order.orderItems.map(prod=>
-            <div key={prod.product._id}>
-              {prod.quantity} x {prod.product.productName}: ₹{(prod.product.price-(prod.product.price*prod.product.discount*0.01))*prod.quantity}
-            </div>
-          )}
-        </div>
-        <div className="row_ order_date"><b>Order Date:</b><br/> {moment(order.createdAt).format("DD/MM/YYYY (hh:mm A)")}</div>
-        <div className="row_ order_date"><b>Delivery Date:</b><br/> {moment(order.createdAt).format("DD/MM/YYYY")}</div>
-        {!props.active ? (<div className="row_ order_date"><b>Delivery Date:</b> {order.updatedAt}</div>):(<></>)}
-        <Link to={'/user/orders/'+order._id} className="row_ ord_btn_cont">
-          <div className="ord_btn">View Details</div>
-        </Link>
+  return props.orders?.map(order=>
+    <div className="col-12 col-md-6 col-lg-4 mt-4" key={order._id}>
+      <div className={"order_card m-1"+(order.orderCancel ? " delete":"")}>
+          {order.orderCancel ? <div className="mb-2" style={{fontWeight: "500", fontSize: "16px", color: "red"}}>Request Sent For Order Cancelation</div>:<></>}
+          <div className="row_ order_number"><b>Order Number:</b> {order._id}</div>
+          <div className="row_ total"><b>Total:</b> ₹{order.grandTotal}</div>
+          <div className="row_ dishes">
+              <b>Dishes:</b>
+              {order.orderItems.map(prod=>
+              <div key={prod.productName}>
+                  {prod.quantity} x {prod.productName}: ₹{prod.total}
+              </div>
+              )}
+          </div>
+          <div className="row_ order_date"><b>Order Date:</b> {moment(order.createdAt).format("DD/MM/YYYY (hh:mm A)")}</div>
+          {order.status!=="Delivered" ? (<div className="row_ order_date"><b>Expected Delivery Date:</b> {order.deliveryDate}</div>):(<div><div className="row_ order_date"><b>Delivered On:</b> {moment(order.updatedAt).format("DD/MM/YYYY")}</div></div>)}
+          <Link to={'/user/orders/'+order._id} className="row_ ord_btn_cont">
+              <div className="ord_btn">View Details</div>
+          </Link>
       </div>
-    </div>
+  </div>
   )
 }
 
@@ -54,8 +54,8 @@ export default function UserOrders() {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then((res)=>{
-          setActiveOrders(res.data.activeOrders)
-          setCompletedOrders(res.data.completedOrders)
+          setActiveOrders(res.data.activeOrders.reverse())
+          setCompletedOrders(res.data.completedOrders.reverse())
         })
         .catch(()=>{
           setPageError(true)

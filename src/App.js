@@ -9,6 +9,7 @@ import Menu from './components/menu/menu';
 import Cart from './components/cart/cart';
 import ProductDetail from './components/product_detail/product_detail';
 import Checkout from './components/checkout/checkout';
+import OrderConfirm from './components/order_confirmation/orderConfirm';
 import Login from './components/login/login';
 import SignUp from './components/login/signup';
 import Preference from './components/login/preference';
@@ -51,6 +52,7 @@ function App() {
             <Route exact path="/contact" component={()=><Contact />} />
             <Route exact path="/cart"  component={()=><Cart triggerModal={triggerModal} />} />
             <Route exact path="/checkout"  component={()=><Checkout />} />
+            <Route exact path="/orderConfirmation"  component={()=><OrderConfirm />} />
             <Route exact path="/login"  component={()=><Login setLoginOrSignupText={setLoginOrSignupText} />} />
             <Route exact path="/signup"  component={()=><SignUp setLoginOrSignupText={setLoginOrSignupText} />} />
             <Route exact path="/signup/preference"  component={()=><Preference setLoginOrSignupText={setLoginOrSignupText} />} />

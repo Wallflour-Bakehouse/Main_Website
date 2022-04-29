@@ -104,7 +104,7 @@ export default function UserChat(props) {
             </a>
           </div>
         </div>
-        <div className="chat_section" id="message_section" tabIndex="0">
+        <div className="chat_section" id="message_section">
           {conversations ?
             ( 
               <>
