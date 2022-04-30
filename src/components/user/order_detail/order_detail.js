@@ -7,7 +7,7 @@ import Loader from '../../loader/loader'
 import {url} from '../../../url'
 import { Link, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMessage, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faMessage, faTrashCan, faRetweet } from '@fortawesome/free-solid-svg-icons'
 import '../../cart/cart.css'
 import './order_detail.css'
 
@@ -49,11 +49,12 @@ export default function UserOrderDetail(props) {
         setModal({open: !modal.open})
     }
 
-    function triggerModal(header, body){
+    function triggerModal(header, body, deleopt){
         setModal({
             open: !modal.open,
             header: header,
-            body: body  
+            body: body,
+            delete: deleopt,
         })
     }
 
@@ -62,8 +63,21 @@ export default function UserOrderDetail(props) {
         .delete(url+`/order/orderCancelation/${order._id}`,{
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then((res)=>{
+        .then(()=>{
             props.triggerModal("Order Cancellation", "Cancellation Request Sent!")
+        })
+        .catch(()=>{
+            props.triggerModal("Error", "Could not request cancelation")
+        })
+    }
+
+    function orderRestore(){
+        axios
+        .delete(url+`/order/orderRestore/${order._id}`,{
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(()=>{
+            props.triggerModal("Order Restored", "Order is successfully restored!")
         })
         .catch(()=>{
             props.triggerModal("Error", "Could not request cancelation")
@@ -76,8 +90,8 @@ export default function UserOrderDetail(props) {
                 <ModalHeader toggle={closeModal}>{modal.header}</ModalHeader>
                 <ModalBody>{modal.body}</ModalBody>
                 <ModalFooter>
-                    <button type="button" className="btn btn-danger" onClick={orderCancelation}>Remove Order</button>
-                    <button type="button" className="btn btn-success" onClick={closeModal}>Cancel</button>
+                <button type="button" className={"btn"+(modal.delete ? " btn-danger":" btn-success")} onClick={modal.delete ? orderCancelation : orderRestore }>{modal.delete ? "Delete":"Restore"} Order</button>
+                    <button type="button" className="btn btn-secondary" onClick={closeModal}>Cancel</button>
                 </ModalFooter>
             </Modal>
         )
@@ -98,7 +112,8 @@ export default function UserOrderDetail(props) {
                 </nav>
                 {order.orderCancel ? <div className="mb-4" style={{fontWeight: "500", fontSize: "22px", color: "red"}}>Request Sent For Order Cancelation</div>:<></>}
                 <DialogBox />
-                <div className="delete" onClick={()=>triggerModal("Order Cancelation", "Are you sure you want to delete this order?")}><FontAwesomeIcon icon={faTrashCan}/></div>
+                <div className="delete" onClick={()=>triggerModal("Order Cancelation", "Are you sure you want to delete this order? Cancelled orders have penalty.",true)}><FontAwesomeIcon icon={faTrashCan}/></div>
+                {order.orderCancel ? <div className="delete restore" onClick={()=>triggerModal("Restore Order?", "Restoring the oroduct will remove the delete request.", false)}><FontAwesomeIcon icon={faRetweet} /></div>:<></>}
                 <div className="head">Your Order: {order._id}</div>
                 <div className="status">
                     <div className="ord_status"><b>Status:</b> {order.status}</div>

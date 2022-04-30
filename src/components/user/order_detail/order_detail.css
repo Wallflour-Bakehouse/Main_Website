@@ -13,6 +13,13 @@
     transition: 0.5s ease-in-out;
     cursor: pointer;
 }
+.order_detail .delete.restore{
+    background-color: green;
+}
+.order_detail .delete.restore::after{
+    content: 'Restore Order';
+    background-color: green;
+}
 .order_detail .delete::after{
     content: 'Request For Order Cancellation';
     position: absolute;
