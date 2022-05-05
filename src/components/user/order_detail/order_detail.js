@@ -112,7 +112,7 @@ export default function UserOrderDetail(props) {
                 </nav>
                 {order.orderCancel ? <div className="mb-4" style={{fontWeight: "500", fontSize: "22px", color: "red"}}>Request Sent For Order Cancelation</div>:<></>}
                 <DialogBox />
-                <div className="delete" onClick={()=>triggerModal("Order Cancelation", "Are you sure you want to delete this order? Cancelled orders have penalty.",true)}><FontAwesomeIcon icon={faTrashCan}/></div>
+                {order.status!=="Delivered" ? (<div className="delete" onClick={()=>triggerModal("Order Cancelation", "Are you sure you want to delete this order? Cancelled orders have penalty.",true)}><FontAwesomeIcon icon={faTrashCan}/></div>):(<></>)}
                 {order.orderCancel ? <div className="delete restore" onClick={()=>triggerModal("Restore Order?", "Restoring the oroduct will remove the delete request.", false)}><FontAwesomeIcon icon={faRetweet} /></div>:<></>}
                 <div className="head">Your Order: {order._id}</div>
                 <div className="status">
@@ -166,10 +166,10 @@ export default function UserOrderDetail(props) {
                     <div className="col-12 col-md-6">
                         <div className="add bill_add p-3 p-md-4 mb-4">
                             <div className="heading">Billing Address</div>
-                            <div className="name">Name: {order.user.firstname} {order.user.lastname}</div>
-                            <div className="name">Phone: +{order.user.countryCode} - {order.user.phoneNumber}</div>
+                            <div className="name">Name: {order.billingAddress.name}</div>
+                            <div className="name">Phone: +{order.billingAddress.countryCode} - {order.billingAddress.phoneNumber}</div>
                             <div><b>Address:</b></div>
-                            <p>{order.user.billingAddress.address}, {order.user.billingAddress.landmark}, {order.user.billingAddress.city} - {order.user.billingAddress.pincode}, {order.user.billingAddress.state}</p>
+                            <p>{order.billingAddress.address}, {order.billingAddress.landmark}, {order.billingAddress.city} - {order.billingAddress.pincode}, {order.billingAddress.state}</p>
                         </div>
                     </div>
                     <div className="col-12 col-md-6">

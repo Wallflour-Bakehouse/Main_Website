@@ -56,13 +56,13 @@ function AddressBox(props){
         props.editAddress({
             id:'',
             name: '',
-            countryCode: '91',
+            countryCode: '',
             phoneNumber: '',
             address: '',
             landmark: '',
-            city: 'Bangalore',
+            city: '',
             pincode: '',
-            state: 'Karnataka'
+            state: ''
         })
     }
 
@@ -77,7 +77,7 @@ function AddressBox(props){
                                     <div>
                                         <h5>{item.name}</h5>
                                         <b>Phone:</b> +{item.countryCode} - {item.phoneNumber}
-                                        <p><b>Address: </b>{item.address}, {item.landmark}, {item.city} - {item.pincode}, {item.state}</p>
+                                        <div><b>Address: </b>{item.address}, {item.landmark}, {item.city} - {item.pincode}, {item.state}</div>
                                     </div>
                                     <div className="confirmation">Address Selected<FontAwesomeIcon icon={faCircleCheck} /></div>
                                 </div>
@@ -98,8 +98,11 @@ function AddressBox(props){
         }
         else{
             return(
-                <div className="box no_add">
-                    <h5>No Delivery Address Added</h5>
+                <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                    <div className="add_address" onClick={addNewAddress}>
+                        <div><FontAwesomeIcon icon={faPlus}/></div>
+                        Click Here To Add A New Address
+                    </div>
                 </div>
             )
         }
@@ -120,16 +123,17 @@ export default function Checkout() {
     const [formData, setFormData] = useState({
         id:'',
         name: '',
-        countryCode: '91',
+        countryCode: '',
         phoneNumber: '',
         address: '',
         landmark: '',
-        city: 'Bangalore',
+        city: '',
         pincode: '',
-        state: 'Karnataka'
+        state: ''
     })
     const [errors, setErrors] = useState({
         name: '',
+        countryCode: '',
         phoneNumber: '',
         address: '',
         landmark: '',
@@ -252,6 +256,7 @@ export default function Checkout() {
 
     function validate(){
         const numPattern = /^\d{10}$/
+        const countryPattern = /^\d{1,3}$/
         
         const nodeList = document.querySelectorAll('.form_error')
         for( let i=0; i<nodeList.length; i++){
@@ -261,6 +266,11 @@ export default function Checkout() {
         if(formData.name.length < 3){
             setErrors({...errors, name: 'Name Should Be Greater Than or Equal To 3 Charecters'})
             document.getElementById('error_name').classList.add('active')
+            return false
+        }
+        if(!countryPattern.test(formData.countryCode)){
+            setErrors({...errors, countryCode: 'Enter A Valid Country Code' })
+            document.getElementById('error_countryCode').classList.add('active')
             return false
         }
         if(!numPattern.test(formData.phoneNumber)){
@@ -273,9 +283,19 @@ export default function Checkout() {
             document.getElementById('error_landmark').classList.add('active')
             return false
         }
+        if(formData.city.length===0){
+            setErrors({...errors, city: 'City can not be empty' })
+            document.getElementById('error_city').classList.add('active')
+            return false
+        }
         if(formData.pincode.length===0 || formData.pincode<530000 || formData.pincode>6400000 ){
             setErrors({...errors, pincode: 'Invalid Pincode' })
             document.getElementById('error_pincode').classList.add('active')
+            return false
+        }
+        if(formData.state.length===0){
+            setErrors({...errors, state: 'State can not be empty' })
+            document.getElementById('error_state').classList.add('active')
             return false
         }
         if(formData.address.length===0){
@@ -308,7 +328,7 @@ export default function Checkout() {
                                 </div>
                             </div>
                             <div className="new_add">
-                            {formVissible ? (<>
+                            {formVissible||user.shippingAddress.length===0 ? (<>
                                 <h5><b>{formData.id ? (<>Edit Delivery Address</>) : (<>Add a New Delivery Address</>) }</b></h5>
                                 <Form className='mt-4'>
                                     <FormGroup row>
@@ -321,13 +341,14 @@ export default function Checkout() {
                                     <FormGroup row>
                                         <Label htmlFor="name" lg={3}>Country Code</Label>
                                         <Col lg={9} >
-                                            <Input type="number" id="name" name="countryCode" autoComplete="off" placeholder="Country Code" value={formData.countryCode} disabled />
+                                            <Input type="number" onKeyDown={ e => ( e.keyCode === 69 || e.keyCode === 190 ) && e.preventDefault() } id="countryCode" name="countryCode" autoComplete="off" placeholder="Country Code" value={formData.countryCode} onChange={handleChange}/>
+                                            <div id="error_countryCode" className='form_error'>{errors.countryCode}</div>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
                                         <Label htmlFor="name" lg={3}>Phone Number</Label>
                                         <Col lg={9} >
-                                            <Input type="number" id="name" name="phoneNumber" autoComplete="off" placeholder="Phone Number" onChange={handleChange} value={formData.phoneNumber} />
+                                            <Input type="number" onKeyDown={ e => ( e.keyCode === 69 || e.keyCode === 190 ) && e.preventDefault() } id="name" name="phoneNumber" autoComplete="off" placeholder="Phone Number" onChange={handleChange} value={formData.phoneNumber} />
                                             <div id="error_phoneNumber" className='form_error'>{errors.phone}</div>
                                         </Col>
                                     </FormGroup>
@@ -341,21 +362,22 @@ export default function Checkout() {
                                     <FormGroup row>
                                         <Label htmlFor="city" lg={3}>City</Label>
                                         <Col  lg={9} >
-                                            <Input type="text"  id="city" name="city" autoComplete="off" placeholder="City" value={formData.city} disabled/>
+                                            <Input type="text"  id="city" name="city" autoComplete="off" placeholder="City" value={formData.city} onChange={handleChange}/>
+                                            <div id="error_city" className='form_error'>{errors.city}</div>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
                                         <Label htmlFor="pincode" lg={3}>Pincode</Label>
                                         <Col  lg={9} >
-                                            <Input type="number"  id="pincode" name="pincode" autoComplete="off" placeholder="Pincode" onChange={handleChange} value={formData.pincode} />
+                                            <Input type="number" onKeyDown={ e => ( e.keyCode === 69 || e.keyCode === 190 ) && e.preventDefault() } id="pincode" name="pincode" autoComplete="off" placeholder="Pincode" onChange={handleChange} value={formData.pincode} />
                                             <div id="error_pincode" className='form_error'>{errors.pincode}</div>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
                                         <Label htmlFor="state" lg={3}>State</Label>
                                         <Col  lg={9} >
-                                            <Input type="input"  id="state" name="state" placeholder="State" value={formData.state} disabled/>
-                                            <div className='form_error'></div>
+                                            <Input type="input"  id="state" name="state" placeholder="State" value={formData.state} onChange={handleChange}/>
+                                            <div id="error_state" className='form_error'>{errors.state}</div>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
@@ -380,21 +402,21 @@ export default function Checkout() {
                             <h5><b>Your Order</b></h5>
                             <div className="container_fluid">
                                 <div className="row header">
-                                    <div className="col-5">Product</div>
-                                    <div className="col-3">Quantity</div>
-                                    <div className="col-4">Total</div>
+                                    <div className="col-6 col-md-5">Product</div>
+                                    <div className="col-3 col-md-3">Quantity</div>
+                                    <div className="col-3 col-md-4">Total</div>
                                 </div>
                                 {cart.cartItems.length>0 ?
                                     (<>
                                         {cart.cartItems.map(item=>
                                             <div className="row content" key={item._id}>
-                                                <div className="col-5">
+                                                <div className="col-6 col-md-5">
                                                     <Link to={`/menu/${item.product.productName}`} style={{color: "var(--lineColour)", textDecoration: "underline"}}>
                                                         {item.product.productName}
                                                     </Link>
                                                 </div>
-                                                <div className="col-3">X {item.quantity}</div>
-                                                <div className="col-4">₹ {item.total}</div>
+                                                <div className="col-3 col-md-3">X {item.quantity}</div>
+                                                <div className="col-3 col-md-4">₹ {item.total}</div>
                                             </div>
                                         )}
                                     </>):(

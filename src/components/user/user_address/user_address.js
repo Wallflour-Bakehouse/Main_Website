@@ -77,7 +77,7 @@ function AddressBox(props){
             return (
                 <div className="box box_add billing_add">
                     <div>
-                    <h5>{props.name}</h5>
+                        <div className='add_heading'>{props.name}</div>
                         <b>Phone:</b> +{props.countryCode} - {props.phoneNumber}
                         <p><b>Address: </b>{props.address.address}, {props.address.landmark}, {props.address.city} - {props.address.pincode}, {props.address.state}</p>
                     </div>
@@ -92,7 +92,7 @@ function AddressBox(props){
                         {props.address.map(item=>
                             <div className="box box_add" key={item._id}>
                                 <div>
-                                    <h5>{item.name}</h5>
+                                    <div className='add_heading'>{item.name}</div>
                                     <b>Phone:</b> +{item.countryCode} - {item.phoneNumber}
                                     <p><b>Address: </b>{item.address}, {item.landmark}, {item.city} - {item.pincode}, {item.state}</p>
                                 </div>
@@ -130,16 +130,17 @@ export default function UserAddress() {
     const [formData, setFormData] = useState({
         id:'',
         name: '',
-        countryCode: '91',
+        countryCode: '',
         phoneNumber: '',
         address: '',
         landmark: '',
-        city: 'Bangalore',
+        city: '',
         pincode: '',
-        state: 'Karnataka'
+        state: ''
     })
     const [errors, setErrors] = useState({
         name: '',
+        countryCode: '',
         phoneNumber: '',
         address: '',
         landmark: '',
@@ -235,7 +236,8 @@ export default function UserAddress() {
     
     function validate(){
         const numPattern = /^\d{10}$/
-        
+        const countryPattern = /^\d{1,3}$/
+
         const nodeList = document.querySelectorAll('.form_error')
         for( let i=0; i<nodeList.length; i++){
             nodeList[i].classList.remove('active')
@@ -244,6 +246,11 @@ export default function UserAddress() {
         if(formData.name.length < 3){
             setErrors({...errors, name: 'Name Should Be Greater Than or Equal To 3 Charecters'})
             document.getElementById('error_name').classList.add('active')
+            return false
+        }
+        if(!countryPattern.test(formData.countryCode)){
+            setErrors({...errors, countryCode: 'Enter A Valid Country Code' })
+            document.getElementById('error_countryCode').classList.add('active')
             return false
         }
         if(!numPattern.test(formData.phoneNumber)){
@@ -256,9 +263,19 @@ export default function UserAddress() {
             document.getElementById('error_landmark').classList.add('active')
             return false
         }
+        if(formData.city.length===0){
+            setErrors({...errors, city: 'City can not be empty' })
+            document.getElementById('error_city').classList.add('active')
+            return false
+        }
         if(formData.pincode.length===0 || formData.pincode<530000 || formData.pincode>6400000 ){
             setErrors({...errors, pincode: 'Invalid Pincode' })
             document.getElementById('error_pincode').classList.add('active')
+            return false
+        }
+        if(formData.state.length===0){
+            setErrors({...errors, state: 'State can not be empty' })
+            document.getElementById('error_state').classList.add('active')
             return false
         }
         if(formData.address.length===0){
@@ -282,7 +299,7 @@ export default function UserAddress() {
                         <li className="breadcrumb-item active" aria-current="page">Your Address</li>
                     </ol>
                 </nav>
-                <div className="heading mb-5">Your Address</div>
+                <div className="heading mb-4 mb-md-5">Your Address</div>
                 <div className="row">
                     <div className="col-12 col-md-6 address_view pe-lg-4">
                         <div className="section billing_address">
@@ -300,53 +317,56 @@ export default function UserAddress() {
                             <FormGroup row>
                                 <Label htmlFor="name" lg={3}>Full Name</Label>
                                 <Col lg={9} >
-                                    <Input type="text" id="name" name="name" autoComplete="off" placeholder="Full Name" onChange={handleChange} value={formData.name} />
+                                    <Input type="text" id="name" name="name" placeholder="Full Name" onChange={handleChange} value={formData.name} />
                                     <div id="error_name" className='form_error'>{errors.name}</div>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label htmlFor="name" lg={3}>Country Code</Label>
                                 <Col lg={9} >
-                                    <Input type="number" id="name" name="countryCode" autoComplete="off" placeholder="Country Code" disabled value={formData.countryCode} />
+                                    <Input type="number" onKeyDown={ e => ( e.keyCode === 69 || e.keyCode === 190 ) && e.preventDefault() } id="name" name="countryCode" placeholder="Country Code" onChange={handleChange} value={formData.countryCode} />
+                                    <div id="error_countryCode" className='form_error'>{errors.countryCode}</div>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label htmlFor="name" lg={3}>Phone Number</Label>
                                 <Col lg={9} >
-                                    <Input type="number" id="name" name="phoneNumber" autoComplete="off" placeholder="Phone Number" onChange={handleChange} value={formData.phoneNumber} />
+                                    <Input type="number" onKeyDown={ e => ( e.keyCode === 69 || e.keyCode === 190 ) && e.preventDefault() } id="name" name="phoneNumber" placeholder="Phone Number" onChange={handleChange} value={formData.phoneNumber} />
                                     <div id="error_phoneNumber" className='form_error'>{errors.phone}</div>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label htmlFor="landmark" lg={3}>Landmark</Label>
                                 <Col  lg={9} >
-                                    <Input type="input"  id="landmark" name="landmark" autoComplete="off" placeholder="Landmark" onChange={handleChange} value={formData.landmark} />
+                                    <Input type="input"  id="landmark" name="landmark" placeholder="Landmark" onChange={handleChange} value={formData.landmark} />
                                     <div id="error_landmark" className='form_error'>{errors.landmark}</div>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label htmlFor="city" lg={3}>City</Label>
                                 <Col  lg={9} >
-                                    <Input type="text"  id="city" name="city" autoComplete="off" placeholder="City" disabled value={formData.city} />
+                                    <Input type="text"  id="city" name="city" placeholder="City" value={formData.city} onChange={handleChange} />
+                                    <div id="error_city" className='form_error'>{errors.city}</div>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label htmlFor="pincode" lg={3}>Pincode</Label>
                                 <Col  lg={9} >
-                                    <Input type="number"  id="pincode" name="pincode" autoComplete="off" placeholder="Pincode" onChange={handleChange} value={formData.pincode} />
+                                    <Input type="number" onKeyDown={ e => ( e.keyCode === 69 || e.keyCode === 190 ) && e.preventDefault() } id="pincode" name="pincode" placeholder="Pincode" onChange={handleChange} value={formData.pincode} />
                                     <div id="error_pincode" className='form_error'>{errors.pincode}</div>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label htmlFor="state" lg={3}>State</Label>
                                 <Col  lg={9} >
-                                    <Input type="input"  id="state" name="state" placeholder="State" disabled value={formData.state} />
+                                    <Input type="input"  id="state" name="state" placeholder="State" value={formData.state} onChange={handleChange} />
+                                    <div id="error_state" className='form_error'>{errors.state}</div>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label htmlFor="address1" lg={3}>Address</Label>
                                 <Col lg={9} >
-                                    <textarea type="text" id="address1" name="address" autoComplete="off" placeholder="Full Address" onChange={handleChange} value={formData.address} />
+                                    <textarea type="text" id="address1" name="address" placeholder="Full Address" onChange={handleChange} value={formData.address} />
                                     <div id="error_address" className='form_error'>{errors.address}</div>
                                 </Col>
                             </FormGroup>

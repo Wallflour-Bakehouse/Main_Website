@@ -13,7 +13,7 @@ function Loginopt({user, token}){
         window.location.replace("/")
     }
 
-    if(token!==""){
+    if(token){
         return(
             <div className="opt">
                 <Link to="/cart" className='cart_btn'><FontAwesomeIcon icon={faCartShopping} /></Link>
@@ -87,7 +87,7 @@ export default function Nav(props) {
                 <div className="navitems">
                     <Link to="/"><div className="navele">Home <FontAwesomeIcon icon={faHouseChimney} /></div></Link>
                     <Link to="/menu"><div className="navele">Menu <FontAwesomeIcon icon={faListUl} /></div></Link>
-                    {token!=="" ? (
+                    {token ? (
                         <Link to="/user/chat" target="_blank">
                             <div className="navele" onClick={messagesOpened}>
                                 <>Chat</>
