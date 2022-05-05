@@ -37,7 +37,7 @@ export default function Error(props) {
         },
         {
             name: 'VEDA',
-            image: 'https://www.yourpurebredpuppy.com/dogbreeds/photos2-L/labrador-retriever-04.jpg',
+            image: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F06%2F02%2Fnewfoundland-black-standing-grass-249332530-2000.jpg',
         },
         {
             name: 'OLLIE',

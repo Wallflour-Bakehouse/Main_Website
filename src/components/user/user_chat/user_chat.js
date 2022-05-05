@@ -4,7 +4,7 @@ import axios from 'axios'
 import moment from 'moment'
 import {url} from '../../../url'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhone, faEnvelope, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import './user_chat.css'
 
@@ -44,9 +44,10 @@ export default function UserChat(props) {
     catch(error){
       setPageError(true)
     }
-  }, [])
+  }, [token, props])
 
   function handleChange(e){
+    if(e.nativeEvent.inputType === "insertLineBreak") return;
     setMessage(e.target.value)
   }
 
@@ -81,6 +82,13 @@ export default function UserChat(props) {
     }
   }
 
+  function enterToSendMsg(e){
+    e.preventDefault();
+    if (e.key === "Enter" || e.keyCode === 13) {
+      handleSubmit()
+    }
+  }
+
   if(pageError){
     return(<Error login={true} />)
   }
@@ -93,13 +101,13 @@ export default function UserChat(props) {
             <div className="name">WallFlour BakeHouse</div>
           </div>
           <div className="right">
-            <a href="" className="social phone" style={{color: "black", transform: "scale(0.9)"}}>
+            <a href="tel:+919740096628" className="social phone" style={{color: "black", transform: "scale(0.9)"}}>
               <FontAwesomeIcon icon={faPhone} />
             </a>
-            <a href="" className="social" style={{color: "rgb(18,140,126)"}}>
+            <a href="https://wa.me/919740096628" className="social" style={{color: "rgb(18,140,126)"}}>
               <FontAwesomeIcon icon={faWhatsapp} />
             </a>
-            <a href="" className="social" style={{color: "rgb(214,41,118)"}}>
+            <a href="https://www.instagram.com/wallflour_bakehouse/" className="social" style={{color: "rgb(214,41,118)"}}>
               <FontAwesomeIcon icon={faInstagram} />
             </a>
           </div>
@@ -126,7 +134,7 @@ export default function UserChat(props) {
         </div>
         <div className="chat_footer">
           <div className="input">
-            <textarea className="type_message" type="text" name="message" placeholder='Type A Message' onChange={handleChange} value={message} />
+            <textarea className="type_message" type="text" name="message" placeholder='Type A Message' onKeyUp={enterToSendMsg} onChange={handleChange} value={message} />
             <div className="error_message">Chat Is Not Available Now. Please Try Again Later</div>
           </div>
           {message.length!==0 ? (

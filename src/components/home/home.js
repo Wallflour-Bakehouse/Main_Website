@@ -67,9 +67,6 @@ export default function Home() {
                             <div className="heading">About Us</div>
                             <div className="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat eius velit voluptatum reprehenderit error voluptate vero sequi quaerat sint, optio vel modi architecto veritatis ipsa sit quo. Dolorem, ratione esse!
                             Mollitia consequuntur atque vel facere aliquam, et, debitis impedit ipsa nulla tempora laboriosam? Nulla dolorum eveniet omnis odit suscipit maiores, quo repellendus molestiae in, assumenda ut consequuntur! Unde, impedit aspernatur.</div>
-                            <div className="btn_cont" style={{marginTop: "50px"}}>
-                                <a href="#" className="btn_" download>Download Menu</a>    
-                            </div>
                         </div>
                     </div>
                 </div>

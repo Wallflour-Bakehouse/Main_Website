@@ -44,28 +44,24 @@ export default function Nav(props) {
 
     const [user, setUser] = useState() 
     const [unreadMessage, setUnreadMessage] = useState() 
-    const [token, setToken] = useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")).token : "")
+    const token = JSON.parse(localStorage.getItem("profile"))?.token
 
     useEffect(() => {
-        try{
-            axios
-            .get(url+'/user/userDP',{
-                headers: { Authorization: `Bearer ${token}` }
-            })
-            .then((res)=>{
-                setUser(res.data.dp)
-            })
-            axios
-            .get(url+'/message/checkUserMessage',{
-                headers: { Authorization: `Bearer ${token}` }
-            })
-            .then((res)=>{
-                setUnreadMessage(res.data)
-            })
-        }catch(error){
-            console.log(error)
-        }
-    }, [])
+        axios
+        .get(url+'/user/userDP',{
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then((res)=>{
+            setUser(res.data.dp)
+        })
+        axios
+        .get(url+'/message/checkUserMessage',{
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then((res)=>{
+            setUnreadMessage(res.data)
+        })
+    }, [token])
 
     function messagesOpened(){
         setUnreadMessage(false)

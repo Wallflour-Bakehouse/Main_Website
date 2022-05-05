@@ -16,7 +16,7 @@ export default function OrderConfirm() {
                 <div className="image">
                     <FontAwesomeIcon icon={faCheck} />
                 </div>
-                <div className="big_heading mb-3">Awsome!</div>
+                <div className="big_heading mb-3">Awesome!</div>
                 <div className="heading  mb-2">Order Placed Successfully!</div>
                 <Link to="user/orders" className="text mb-3">Click Here To View Orders</Link>
                 <div className="sub_text mb-2">Payment link will be available after order is accepted.</div>

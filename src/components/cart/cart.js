@@ -4,7 +4,7 @@ import Error from '../error/error';
 import axios from 'axios'
 import emptyCart from './images/empty_cart2.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faAngleUp, faCalendarDay, faMessage, faMinus, faShoppingBag, faTrash, faUtensils } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp, faMessage, faTrash, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import {url} from '../../url'
 import { Link } from 'react-router-dom'
 import './cart.css'
@@ -14,7 +14,7 @@ export default function Cart(props) {
     const [cart, setCart] = useState()
     const [orderOpen, setOrderOpen] = useState()
     const [pageError, setPageError] = useState()
-    const token = JSON.parse(localStorage.getItem("profile")).token
+    const token = JSON.parse(localStorage.getItem("profile"))?.token
 
     useEffect(() => {
         document.title = `Wallflour Bakehouse | Cart`
@@ -24,23 +24,28 @@ export default function Cart(props) {
             ele.classList.remove('active')
         })
         document.getElementById('mob_2').classList.add('active')
-        try{
-            axios
-            .get(url+'/cart/',{
-                headers: {'authorization': `Bearer ${token}`}
-            })
-            .then((res)=>{
-                setCart(res.data.cart)
-                setOrderOpen(res.data.openOrder)
-            })
-            .catch((error)=>{
+        if(token){
+            try{
+                axios
+                .get(url+'/cart/',{
+                    headers: {'authorization': `Bearer ${token}`}
+                })
+                .then((res)=>{
+                    setCart(res.data.cart)
+                    setOrderOpen(res.data.openOrder)
+                })
+                .catch((error)=>{
+                    setPageError(true)
+                })
+            } 
+            catch(error){
                 setPageError(true)
-            })
-        } 
-        catch(error){
-            setPageError(true)
+            }
         }
-    }, [])
+        else{
+            window.location.replace("/login")
+        }
+    }, [token])
 
     function deleteProductFromCart(productId, quantity){
 
@@ -57,7 +62,7 @@ export default function Cart(props) {
                 let cartItem=cart.cartItems
                 let price=0
                 let discount=0
-                cartItem.map((item, i)=>{
+                cartItem.forEach((item, i)=>{
                     if(productId===item.product._id){
                         discount=item.product.discount
                         price=item.product.price
@@ -76,7 +81,7 @@ export default function Cart(props) {
     function updateQuantity(id, qty){
         let cartItem=cart.cartItems
         let grandTotal=0
-        cartItem.map(item=>{
+        cartItem.forEach(item=>{
             if(id===item.product._id && qty<6 && qty>0){
                 item.quantity=qty
                 item.total=(item.product.price-(item.product.price*item.product.discount*0.01))*item.quantity
