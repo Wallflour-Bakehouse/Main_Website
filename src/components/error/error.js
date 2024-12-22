@@ -37,11 +37,11 @@ export default function Error(props) {
         },
         {
             name: 'VEDA',
-            image: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F06%2F02%2Fnewfoundland-black-standing-grass-249332530-2000.jpg',
+            image: 'https://i.pinimg.com/236x/00/41/2c/00412c4bcbca98674f5cb538f49df75b.jpg',
         },
         {
             name: 'OLLIE',
-            image: 'https://www.ctvsh.com/sites/default/files/styles/large/public/golden-retriever-dog-breed-info.jpg?itok=KV7Ojj-C',
+            image: 'https://www.pd.com.au/wp-content/uploads/2022/02/justin-aikin-KFJuCzJiQYU-unsplash-2.jpg',
         },
         {
             name: 'BOOMER',
